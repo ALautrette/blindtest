@@ -19,5 +19,7 @@ $router->get('/test', "Test#show");
 $router->get('/test/:id', "Test#acces");
 
 $router->get('/users', "User#index");
+$router->get('/users/create', "User#createForm");
+$router->post('/users/create', "User#create");
 
 $router->run();
