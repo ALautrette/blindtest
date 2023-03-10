@@ -11,10 +11,10 @@ class Connector
 
     public function __construct()
     {
-        $DATABASE_HOST = 'localhost';
-        $DATABASE_USER = 'root';
-        $DATABASE_PASS = '';
-        $DATABASE_NAME = 'blindtest';
+        $DATABASE_HOST = $GLOBALS['DATABASE_HOST'];
+        $DATABASE_USER = $GLOBALS['DATABASE_USER'];
+        $DATABASE_PASS = $GLOBALS['DATABASE_PASS'];
+        $DATABASE_NAME = $GLOBALS['DATABASE_NAME'];
 
         try {
             $this->pdo = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);

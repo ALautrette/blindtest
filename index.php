@@ -1,9 +1,11 @@
 <?php
 
 use Route\Router;
+require_once('Config/config.php');
 
 spl_autoload_register(function ($class_name) {
-    require($class_name . '.php');
+    $class_name = str_replace("\\", "/", $class_name);
+    require_once($class_name . '.php');
 });
 
 $router = new Router($_GET['url']);

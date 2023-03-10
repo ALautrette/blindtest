@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    ports: ['3306:3306']
+    volumes:
+      - ./docker/storage:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: blindtest
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_ROOT_PASSWORD:
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+
+  app:
+    build:
+      dockerfile: docker/Dockerfile
+    container_name: app
+    restart: always
+    depends_on: ['db']
+    ports: ['80:80']
+    links: ['db:db']
+    volumes:
+      - '.:/var/www/html'
