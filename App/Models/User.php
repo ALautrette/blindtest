@@ -5,13 +5,13 @@ namespace App\Models;
 class User
 {
     public function __construct(
-        private string $id,
+        private int $id,
         private string $username,
         private string $email,
         private string $password,
     ) {}
 
-    public function id(): string
+    public function id(): int
     {
         return $this->id;
     }

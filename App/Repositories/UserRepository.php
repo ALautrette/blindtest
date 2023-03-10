@@ -4,16 +4,16 @@ use App\Models\User;
 
 class UserRepository extends Connector implements RepositoryInterface
 {
-
+    private string $tableName = 'users';
     public function create($dataByColumns): User
     {
-        $userData = $this->abstractCreate('users', $dataByColumns);
+        $userData = $this->abstractCreate($this->tableName, $dataByColumns);
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
     }
 
     public function find(int $id, ?array $columns): User
     {
-        $userData = $this->abstractFind('users', $id, $columns);
+        $userData = $this->abstractFind($this->tableName, $id, $columns);
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
     }
 
@@ -22,7 +22,7 @@ class UserRepository extends Connector implements RepositoryInterface
      */
     public function findAll(?array $columns): array
     {
-        $usersData = $this->abstractFindAll('users', $columns);
+        $usersData = $this->abstractFindAll($this->tableName, $columns);
         $users = [];
         foreach ($usersData as $userData) {
             $users[] = new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
@@ -32,12 +32,12 @@ class UserRepository extends Connector implements RepositoryInterface
 
     public function update(int $id, array $dataByColumns): User
     {
-        $userData = $this->abstractUpdate('users', $id, $dataByColumns);
+        $userData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
     }
 
     public function delete(int $id)
     {
-        $this->abstractDelete('users', $id);
+        $this->abstractDelete($this->tableName, $id);
     }
 }
