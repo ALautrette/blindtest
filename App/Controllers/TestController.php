@@ -44,4 +44,8 @@ class TestController
             echo '<br>There is a problem with the update of a user';
         }
     }
+    public function acces($id)
+    {
+        echo 'mon id est ' . $id;
+    }
 }
