@@ -18,4 +18,7 @@ $router->get('/posts/:id', function ($id) {
 $router->get('/test', "Test#show");
 $router->get('/test/:id', "Test#acces");
 
+$router->get('/register', "Auth#create");
+$router->post('/register', "Auth#store");
+
 $router->run();
