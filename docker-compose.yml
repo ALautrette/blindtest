@@ -5,7 +5,8 @@ services:
     restart: always
     ports: ['3306:3306']
     volumes:
-      - ./docker/storage:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./blindtest.sql:/docker-entrypoint-initdb.d/blindtest.sql
     environment:
       MYSQL_DATABASE: blindtest
       MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
@@ -34,3 +35,6 @@ services:
     links: ['db:db']
     volumes:
       - '.:/var/www/html'
+
+volumes:
+  db_data:
