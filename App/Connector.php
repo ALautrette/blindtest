@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use PDO;
+use PDOException;
+
 class Connector
 {
     private ?PDO $pdo;
@@ -33,7 +38,7 @@ class Connector
         return $this->pdo->query("SELECT $columns FROM $table")->fetchAll();
     }
 
-    protected function abstractFind(string $table, int $id, ?array $columns): array
+    protected function abstractFind(string $table, int $id, ?array $columns = null): array
     {
         if ($columns === null) {
             return $this->pdo->query("SELECT * FROM $table WHERE id = $id")->fetch();
@@ -46,7 +51,12 @@ class Connector
     protected function abstractUpdate(string $table, int $id, array $dataByColumns): array
     {
         $updateData = implode(',', array_map(fn($key, $value) => "$key = '$value'", array_keys($dataByColumns), $dataByColumns));
-        return $this->pdo->query("UPDATE $table SET $updateData WHERE id = $id")->fetch();
+        $success = $this->pdo->query("UPDATE $table SET $updateData WHERE id = $id");
+        if ($success) {
+            return $this->abstractFind($table, $id);
+        } else {
+            throw new PDOException('Failed to update data');
+        }
     }
 
     protected function abstractDelete(string $table, int $id): void
@@ -58,6 +68,11 @@ class Connector
     {
         $columns = implode(',', array_keys($dataByColumns));
         $values = implode(',', array_map(fn($value) => "'$value'", $dataByColumns));
-        return $this->pdo->query("INSERT INTO $table ($columns) VALUES ($values)")->fetch();
+        $success = $this->pdo->query("INSERT INTO $table ($columns) VALUES ($values)");
+        if ($success) {
+            return $this->abstractFind($table, $this->pdo->lastInsertId());
+        } else {
+            throw new PDOException('Failed to create data');
+        }
     }
 }

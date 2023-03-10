@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Models\User;
+use App\Connector;
 
 class UserRepository extends Connector implements RepositoryInterface
 {
@@ -11,7 +14,7 @@ class UserRepository extends Connector implements RepositoryInterface
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
     }
 
-    public function find(int $id, ?array $columns): User
+    public function find(int $id, ?array $columns = null): User
     {
         $userData = $this->abstractFind($this->tableName, $id, $columns);
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
@@ -20,7 +23,7 @@ class UserRepository extends Connector implements RepositoryInterface
     /**
      * @return User[]
      */
-    public function findAll(?array $columns): array
+    public function findAll(?array $columns = null): array
     {
         $usersData = $this->abstractFindAll($this->tableName, $columns);
         $users = [];
