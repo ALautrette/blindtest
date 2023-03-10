@@ -1,2 +1,5 @@
 .idea/
 .vscode/
+
+docker/storage/*
+Config/config.php
