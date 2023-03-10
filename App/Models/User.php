@@ -25,4 +25,9 @@ class User
     {
         return $this->email;
     }
+
+    public function password(): string
+    {
+        return $this->password;
+    }
 }

@@ -50,8 +50,12 @@ class Connector
 
     protected function abstractUpdate(string $table, int $id, array $dataByColumns): array
     {
-        $updateData = implode(',', array_map(fn($key, $value) => "$key = '$value'", array_keys($dataByColumns), $dataByColumns));
-        $success = $this->pdo->query("UPDATE $table SET $updateData WHERE id = $id");
+        $columnsToUpdate = implode(',', array_map(fn($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
+        $sql = "UPDATE $table SET $columnsToUpdate WHERE id = :id";
+        $success = $this->pdo
+            ->prepare($sql)
+            ->execute([...$dataByColumns, ...['id' => $id]]);
+
         if ($success) {
             return $this->abstractFind($table, $id);
         } else {
@@ -67,8 +71,11 @@ class Connector
     protected function abstractCreate(string $table, array $dataByColumns): array
     {
         $columns = implode(',', array_keys($dataByColumns));
-        $values = implode(',', array_map(fn($value) => "'$value'", $dataByColumns));
-        $success = $this->pdo->query("INSERT INTO $table ($columns) VALUES ($values)");
+        $preparedValues = implode(',', array_fill(0, count($dataByColumns), '?'));
+        $success = $this->pdo
+            ->prepare("INSERT INTO $table ($columns) VALUES ($preparedValues)")
+            ->execute(array_values($dataByColumns));
+
         if ($success) {
             return $this->abstractFind($table, $this->pdo->lastInsertId());
         } else {
