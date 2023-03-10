@@ -9,6 +9,7 @@ class User
         private string $username,
         private string $email,
         private string $password,
+        private bool $isAdmin,
     ) {}
 
     public function id(): int
@@ -29,5 +30,10 @@ class User
     public function password(): string
     {
         return $this->password;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
     }
 }

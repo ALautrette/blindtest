@@ -16,4 +16,6 @@ $router->get('/posts/:id', function ($id) {
 $router->get('/test', "Test#show");
 $router->get('/test/:id', "Test#acces");
 
+$router->get('/users', "User#index");
+
 $router->run();
