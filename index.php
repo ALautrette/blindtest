@@ -21,4 +21,7 @@ $router->get('/test/:id', "Test#acces");
 $router->get('/register', "Auth#create");
 $router->post('/register', "Auth#store");
 
+$router->get('/login', "Auth#loginPage");
+$router->post('/login', "Auth#login");
+
 $router->run();

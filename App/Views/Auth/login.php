@@ -1,13 +1,8 @@
 <?php ?>
 
 <div>
-    <h1>Register</h1>
-    <form action="/register" method="post">
-
-        <label for="username">
-            Username
-        </label>
-        <input type="text" name="username" placeholder="Username" id="username" required>
+    <h1>Login</h1>
+    <form action="/login" method="post">
 
         <label for="email">
             Email
@@ -19,7 +14,7 @@
         </label>
         <input type="password" name="password" placeholder="Password" id="password" required>
 
-        <input type="submit" value="Register">
+        <input type="submit" value="Login">
     </form>
         <?php if (isset($message)) : ?>
             <p><?= $message ?></p>

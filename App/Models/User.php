@@ -30,4 +30,14 @@ class User
     {
         return $this->password;
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function verifyPassword(mixed $password): void
+    {
+        if (!password_verify($password, $this->password)) {
+            throw new \Exception('Invalid password');
+        }
+    }
 }
