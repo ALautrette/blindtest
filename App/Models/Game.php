@@ -8,7 +8,7 @@ class Game
         private int $id,
         private string $date,
         private int $playlistId,
-        private int $user_id
+        private int $userId
     ) {
     }
 
@@ -25,5 +25,10 @@ class Game
     public function playlistId(): int
     {
         return $this->playlistId;
+    }
+
+    public function userId(): int
+    {
+        return $this->userId;
     }
 }

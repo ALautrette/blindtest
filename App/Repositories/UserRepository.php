@@ -53,6 +53,6 @@ class UserRepository extends Connector implements RepositoryInterface
         if ($userData === false) {
             throw new \Exception('Invalid email');
         }
-        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
+        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password'], $userData['is_admin']);
     }
 }
