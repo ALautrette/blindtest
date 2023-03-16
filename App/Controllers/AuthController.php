@@ -2,16 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Connector;
-use App\Models\User;
 use App\Repositories\UserRepository;
 
 class AuthController
 {
     public function __construct(
         private UserRepository $userRepository = new UserRepository()
-    )
-    {
+    ) {
     }
 
     public function create()

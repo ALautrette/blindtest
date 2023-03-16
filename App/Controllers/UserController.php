@@ -7,7 +7,6 @@ use PDOException;
 
 class UserController
 {
-
     public function __construct(
         private UserRepository $userRepository = new UserRepository(),
     ) {

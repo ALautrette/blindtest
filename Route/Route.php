@@ -1,9 +1,9 @@
 <?php
+
 namespace Route;
 
 class Route
 {
-
     private $path;
     private $callable;
     private $matches = [];
@@ -16,7 +16,7 @@ class Route
     }
 
     /**
-     * Permettra de capturer l'url avec les paramètre 
+     * Permettra de capturer l'url avec les paramètre
      * get('/posts/:slug-:id') par exemple
      **/
     public function match($url)
@@ -39,9 +39,10 @@ class Route
         }
         return '([^/]+)';
     }
-    
-    public function call(){
-        if(is_string($this->callable)){
+
+    public function call()
+    {
+        if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             $controller = "App\\Controllers\\" . $params[0] . "Controller";
             $controller = new $controller();
@@ -57,9 +58,10 @@ class Route
         return $this; // On retourne tjrs l'objet pour enchainer les arguments
     }
 
-    public function getUrl($params){
+    public function getUrl($params)
+    {
         $path = $this->path;
-        foreach($params as $k => $v){
+        foreach ($params as $k => $v) {
             $path = str_replace(":$k", $v, $path);
         }
         return $path;

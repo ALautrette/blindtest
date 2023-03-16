@@ -17,7 +17,8 @@ class TagRepository extends Connector implements RepositoryInterface
     public function find(int $id, ?array $columns = null): Tag
     {
         $tagData = $this->abstractFind($this->tableName, $id, $columns);
-        return new Tag($tagData['id'], $tagData['name']);    }
+        return new Tag($tagData['id'], $tagData['name']);
+    }
 
     /**
      * @return Tag[]
@@ -25,12 +26,12 @@ class TagRepository extends Connector implements RepositoryInterface
     public function findAll(?array $columns = null): array
     {
         $tagsData = $this->abstractFindAll($this->tableName, $columns);
-        
+
         $tags = [];
         foreach ($tagsData as $tagData) {
             $tags[] = new Tag($tagData['id'], $tagData['name']);
         }
-        
+
         return $tags;
     }
 
