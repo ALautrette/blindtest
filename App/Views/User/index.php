@@ -1,8 +1,7 @@
 <?php
 
 use App\Models\User;
-
-require_once './App/Views/Layouts/head.php';?>
+?>
 
 <table class="table">
   <thead>
@@ -16,17 +15,16 @@ require_once './App/Views/Layouts/head.php';?>
   </thead>
   <tbody>
 
-  <?php /** @var User[] $users */
-  foreach ($users as $user) { ?>
-    <tr>
-      <th scope="row"><?= $user->id() ?></th>
-      <td><?= $user->username() ?></td>
-      <td><?= $user->email() ?></td>
-      <td><?= $user->password() ?></td>
-      <td><?= $user->isAdmin() ?></td>
-    </tr>
-  <?php } ?>
+    <?php /** @var User[] $users */
+    foreach ($users as $user) { ?>
+      <tr>
+        <th scope="row"><?= $user->id() ?></th>
+        <td><?= $user->username() ?></td>
+        <td><?= $user->email() ?></td>
+        <td><?= $user->password() ?></td>
+        <td><?= $user->isAdmin() ?></td>
+      </tr>
+    <?php } ?>
 
   </tbody>
 </table>
-

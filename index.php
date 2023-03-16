@@ -1,7 +1,9 @@
 <?php
 
 use Route\Router;
+
 require_once('Config/config.php');
+require_once './App/Views/Layouts/head.php';
 
 spl_autoload_register(function ($class_name) {
     $class_name = str_replace("\\", "/", $class_name);

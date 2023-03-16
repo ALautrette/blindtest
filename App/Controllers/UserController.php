@@ -32,13 +32,15 @@ class UserController
                 "username" => $_POST["username"],
                 "email" => $_POST["email"],
                 "password" => crypt($_POST["password"], "salt"),
-                "is_admin" => $_POST["is_amdin"],
+                "is_admin" => isset($_POST["is_admin"]) ? 1 : 0,
             ]);
             $success = "Utilisateur créé avec succès";
-            require_once __DIR__ . '/../Views/User/index.php';
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->createForm();
         } catch (PDOException $e) {
             $error = $e->getMessage();
-            require_once __DIR__ . '/../Views/User/create.php';
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->createForm();
         }
     }
 }
