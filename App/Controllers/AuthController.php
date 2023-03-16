@@ -51,8 +51,7 @@ class AuthController
             $user = $this->userRepository->findByEmail($_POST['email']);
             $user->verifyPassword($_POST['password']);
 
-            session_start();
-            $_SESSION['username'] = $user->username();
+            $_SESSION['user'] = $user;
             return require_once __DIR__ . '/../Views/dashboard.php';
         } catch (\Exception $e) {
             $message = $e->getMessage();
