@@ -1,5 +1,6 @@
 <?php
 
+use Route\Middlewares\AuthMiddleware;
 use Route\Router;
 
 require_once('Config/config.php');
@@ -18,7 +19,9 @@ $router->get('/posts/:id', function ($id) {
     echo "Voila l'article $id";
 });
 $router->get('/test', "Test#show");
+$router->get('/test/auth', 'Test#auth')->middleware(new AuthMiddleware());
 $router->get('/test/:id', "Test#acces");
+
 
 $router->get('/users', "User#index");
 $router->get('/users/create', "User#createForm");
