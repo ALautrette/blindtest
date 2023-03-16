@@ -10,7 +10,8 @@ class User
         private string $email,
         private string $password,
         private bool $isAdmin,
-    ) {}
+    ) {
+    }
 
     public function id(): int
     {
@@ -35,5 +36,15 @@ class User
     public function isAdmin(): bool
     {
         return $this->isAdmin;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function verifyPassword(mixed $password): void
+    {
+        if (!password_verify($password, $this->password)) {
+            throw new \Exception('Invalid password');
+        }
     }
 }

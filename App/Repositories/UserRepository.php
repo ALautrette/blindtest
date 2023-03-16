@@ -43,4 +43,16 @@ class UserRepository extends Connector implements RepositoryInterface
     {
         $this->abstractDelete($this->tableName, $id);
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function findByEmail(string $email, ?array $columns = null): User
+    {
+        $userData = $this->abstractFindBy($this->tableName, 'email', $email, $columns);
+        if ($userData === false) {
+            throw new \Exception('Invalid email');
+        }
+        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
+    }
 }

@@ -23,5 +23,10 @@ $router->get('/test/:id', "Test#acces");
 $router->get('/users', "User#index");
 $router->get('/users/create', "User#createForm");
 $router->post('/users/create', "User#create");
+$router->get('/register', "Auth#create");
+$router->post('/register', "Auth#store");
+
+$router->get('/login', "Auth#loginPage");
+$router->post('/login', "Auth#login");
 
 $router->run();

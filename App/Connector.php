@@ -48,6 +48,16 @@ class Connector
         return $this->pdo->query("SELECT $columns FROM $table WHERE id = $id")->fetch();
     }
 
+    protected function abstractFindBy(string $table, string $column, string $value, ?array $columns = null): array|false
+    {
+        if ($columns === null) {
+            return $this->pdo->query("SELECT * FROM $table WHERE $column = '$value'")->fetch();
+        }
+
+        $columns = implode(',', $columns);
+        return $this->pdo->query("SELECT $columns FROM $table WHERE $column = '$value'")->fetch();
+    }
+
     protected function abstractUpdate(string $table, int $id, array $dataByColumns): array
     {
         $columnsToUpdate = implode(',', array_map(fn($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
