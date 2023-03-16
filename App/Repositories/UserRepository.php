@@ -43,16 +43,4 @@ class UserRepository extends Connector implements RepositoryInterface
     {
         $this->abstractDelete($this->tableName, $id);
     }
-
-    public function findByUsername(string $username): User
-    {
-        $userData = $this->abstractFindBy($this->tableName, 'username', $username);
-        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
-    }
-
-    public function findByEmail(string $email): User
-    {
-        $userData = $this->abstractFindBy($this->tableName, 'email', $email);
-        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password']);
-    }
 }
