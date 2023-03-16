@@ -1,7 +1,9 @@
 <?php
 
 use Route\Router;
+
 require_once('Config/config.php');
+require_once './App/Views/Layouts/head.php';
 
 spl_autoload_register(function ($class_name) {
     $class_name = str_replace("\\", "/", $class_name);
@@ -17,5 +19,9 @@ $router->get('/posts/:id', function ($id) {
 });
 $router->get('/test', "Test#show");
 $router->get('/test/:id', "Test#acces");
+
+$router->get('/users', "User#index");
+$router->get('/users/create', "User#createForm");
+$router->post('/users/create', "User#create");
 
 $router->run();

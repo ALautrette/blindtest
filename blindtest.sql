@@ -22,12 +22,16 @@ CREATE TABLE IF NOT EXISTS `musics` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+ALTER TABLE `musics` ADD UNIQUE INDEX `music` (`url`,`timecode`)
+
 -- Listage de la structure de la table blindtest. tags
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `tags` ADD UNIQUE INDEX `name` (`name`)
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -40,6 +44,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `is_admin` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+
+ALTER TABLE `users` ADD UNIQUE INDEX `email` (`email`)
+ALTER TABLE `users` ADD UNIQUE INDEX `username` (`username`)
 
 -- Listage de la structure de la table blindtest. playlists
 CREATE TABLE IF NOT EXISTS `playlists` (

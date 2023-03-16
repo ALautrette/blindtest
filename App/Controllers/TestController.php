@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Connector;
 use App\Repositories\UserRepository;
 
 class TestController

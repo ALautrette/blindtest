@@ -8,7 +8,9 @@ class Game
         private int $id,
         private string $date,
         private int $playlistId,
-    ) {}
+        private int $user_id
+    ) {
+    }
 
     public function id(): int
     {
