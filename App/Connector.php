@@ -60,7 +60,7 @@ class Connector
 
     protected function abstractUpdate(string $table, int $id, array $dataByColumns): array
     {
-        $columnsToUpdate = implode(',', array_map(fn ($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
+        $columnsToUpdate = implode(',', array_map(fn($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
         $sql = "UPDATE $table SET $columnsToUpdate WHERE id = :id";
         $success = $this->pdo
             ->prepare($sql)
@@ -91,5 +91,14 @@ class Connector
         } else {
             throw new PDOException('Failed to create data');
         }
+    }
+
+    protected function findAllGamesWithRelations(): false|array
+    {
+        return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
+            FROM games, playlists, users
+            WHERE games.playlist_id = playlists.id 
+            AND games.user_id = users.id")
+            ->fetchAll();
     }
 }

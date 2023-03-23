@@ -1,19 +1,27 @@
-<form method="POST" action="/users/create">
+<?php
+require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
+?>
+
+<form method="POST" action="/games/create">
     <div class="form-group">
-        <label for="exampleInputEmail1">Username</label>
-        <input type="text" class="form-control" name="username" placeholder="Enter email">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" name="date" placeholder="Pick date">
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" name="email" placeholder="Enter email">
+        <label for="playlist_id">Playlist liée</label>
+        <select name="playlist_id">
+            <?php foreach ($playlists as $playlist){ ?>
+                <option value="<?= $playlist->id() ?>"><?= $playlist->name() ?></option>
+            <?php } ?>
+        </select>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
-    </div>
-    <div class="form-check">
-        <label class="form-check-label" for="exampleCheck1">Administrateur ?</label>
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="is_admin">
+        <label for="user_id">Hôte de la partie</label>
+        <select name="user_id">
+            <?php foreach ($users as $user) { ?>
+                <option value="<?= $user->id() ?>"><?= $user->username() ?></option>
+            <?php } ?>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -35,6 +35,10 @@ class GameRepository extends Connector implements RepositoryInterface
         return $games;
     }
 
+    /**
+     * @return Game[]
+     */
+
     public function update(int $id, array $dataByColumns): Game
     {
         $gameData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
@@ -44,5 +48,10 @@ class GameRepository extends Connector implements RepositoryInterface
     public function delete(int $id)
     {
         $this->abstractDelete($this->tableName, $id);
+    }
+
+    public function findAllWithRelations(): false|array
+    {
+        return $this->findAllGamesWithRelations();
     }
 }

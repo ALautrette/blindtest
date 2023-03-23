@@ -17,13 +17,13 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
   </thead>
   <tbody>
 
-    <?php /** @var Game[] $games */
+    <?php
     foreach ($games as $game) { ?>
       <tr>
-        <th scope="row"><?= $game->id() ?></th>
-        <td><?= $game->playlistId() ?></td>
-        <td><?= $game->userId() ?></td>
-        <td><?= $game->date() ?></td>
+        <th scope="row"><?= $game['id'] ?></th>
+        <td><?= $game['playlist_name'] ?></td>
+        <td><?= $game['host_username'] ?></td>
+        <td><?= $game['date'] ?></td>
       </tr>
     <?php } ?>
 

@@ -8,7 +8,7 @@ class Game
         private int $id,
         private string $date,
         private int $playlistId,
-        private int $userId
+        private int $userId,
     ) {
     }
 
