@@ -42,4 +42,30 @@ class UserController
             $this->createForm();
         }
     }
+
+    public function delete($id): void
+    {
+        try {
+            $this->userRepository->delete($id);
+            $success = "Utilisateur supprimé avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+
+    }
+
+    public function show($id){
+        try{
+            $user = $this->userRepository->find($id);
+            require_once __DIR__ . '/../Views/User/show.php';
+        } catch (PDOException $e){
+            $error = 'L\'utilisateur n\'a pas été trouvé';
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+    }
 }
