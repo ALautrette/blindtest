@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Repositories\MusicRepository;
 use App\Repositories\TagRepository;
 use App\Repositories\PlaylistRepository;
 
 class MusicController
 {
     public function __construct(
-        private TagRepository $musicRepository = new TagRepository(),
+        private MusicRepository $musicRepository = new MusicRepository(),
     ) {
     }
 

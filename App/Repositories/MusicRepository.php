@@ -5,9 +5,10 @@ namespace App\Repositories;
 use App\Connector;
 use App\Models\Music;
 
-class TagRepository extends Connector implements RepositoryInterface
+class MusicRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'musics';
+
     public function create($dataByColumns): Music
     {
         $musicData = $this->abstractCreate($this->tableName, $dataByColumns);
@@ -31,7 +32,6 @@ class TagRepository extends Connector implements RepositoryInterface
         foreach ($musicsData as $musicData) {
             $musics[] = new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
         }
-
         return $musics;
     }
 
@@ -44,5 +44,16 @@ class TagRepository extends Connector implements RepositoryInterface
     public function delete(int $id)
     {
         $this->abstractDelete($this->tableName, $id);
+    }
+
+    public function insertMusicPlaylist(int $musicId, int $playlistId)
+    {
+        $success = $this->pdo->prepare(
+            "insert into music_playlist (music_id, playlist_id) values (?, ?)"
+        )->execute([$musicId, $playlistId]);
+
+        if(!$success){
+            throw new PDOException('Failed to create data');
+        }
     }
 }

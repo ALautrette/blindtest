@@ -7,7 +7,7 @@ use PDOException;
 
 class Connector
 {
-    private ?PDO $pdo;
+    protected ?PDO $pdo;
 
     public function __construct()
     {

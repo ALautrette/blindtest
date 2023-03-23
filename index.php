@@ -39,8 +39,9 @@ $router->get('/musics/create', "Music#createForm");
 $router->get('/tags', "Tag#index");
 $router->get('/tags/create', "Tag#createForm");
 
-$router->get('/playlists', "Playlist#index");
+$router->get('/playlists', "Playlist#index")->middleware(new AdminMiddleware());
 $router->get('/playlists/create', "Playlist#createForm");
+$router->post('/playlists/create', "Playlist#create");
 
 $router->get('/games', "Game#index");
 $router->get('/games/create', "Game#createForm");

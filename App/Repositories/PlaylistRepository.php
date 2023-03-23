@@ -4,14 +4,15 @@ namespace App\Repositories;
 
 use App\Connector;
 use App\Models\Music;
+use App\Models\Playlist;
 
 class PlaylistRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'playlists';
-    public function create($dataByColumns): Music
+    public function create($dataByColumns): Playlist
     {
         $musicData = $this->abstractCreate($this->tableName, $dataByColumns);
-        return new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
+        return new Playlist($musicData['id'], $musicData['name'], $musicData['user_id'], $musicData['is_public']);
     }
 
     public function find(int $id, ?array $columns = null): Music
