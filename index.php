@@ -42,6 +42,10 @@ $router->get('/musics/:id/delete', "Music#delete")->middleware(new AuthMiddlewar
 
 $router->get('/tags', "Tag#index");
 $router->get('/tags/create', "Tag#createForm");
+$router->post('/tags/create', "Tag#create");
+$router->get('/tags/:id/update', "Tag#updateForm");
+$router->post('/tags/:id/update', "Tag#update");
+$router->get('/tags/:id/delete', "Tag#delete");
 
 $router->get('/playlists', "Playlist#index");
 $router->get('/playlists/create', "Playlist#createForm");

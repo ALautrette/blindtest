@@ -29,8 +29,8 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
             <td><?= $music->url() ?></td>
             <td><?= $music->timecode() ?></td>
             <td>
-                <a href="<?= "/musics/" . $music->id() . "/delete" ?>">Supprimer</a>
-                <a href="<?= "/musics/" . $music->id() . "/update" ?>">Modifier</a>
+                <a href="/musics/<?= $music->id() ?>/update" class="btn btn-primary">Modifier</a>
+                <a href="/musics/<?= $music->id() ?>/delete" class="btn btn-danger">Supprimer</a>
             </td>
         </tr>
     <?php } ?>
