@@ -26,12 +26,12 @@ class AuthController
         try {
             $_POST['password'] = crypt($_POST['password'], 'salt');
             $user = $this->userRepository->create($_POST);
-            $_SESSION['username'] = $user->username();
+            $_SESSION['user'] = $user;
+            header('Location: /dashboard');
         } catch (\PDOException $e) {
             $message = $this->getErrorMessage($e);
             return require_once __DIR__ . '/../Views/Auth/register.php';
         }
-        return require_once __DIR__ . '/../Views/dashboard.php';
     }
 
     public function loginPage()
@@ -56,6 +56,12 @@ class AuthController
             $message = $e->getMessage();
             return require_once __DIR__ . '/../Views/Auth/login.php';
         }
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['user']);
+        header('Location: /');
     }
 
     private function getErrorMessage(\PDOException|\Exception $e): string
