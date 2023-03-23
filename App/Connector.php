@@ -7,7 +7,7 @@ use PDOException;
 
 class Connector
 {
-    private ?PDO $pdo;
+    protected ?PDO $pdo;
 
     public function __construct()
     {
@@ -91,14 +91,5 @@ class Connector
         } else {
             throw new PDOException('Failed to create data');
         }
-    }
-
-    protected function findAllGamesWithRelations(): false|array
-    {
-        return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
-            FROM games, playlists, users
-            WHERE games.playlist_id = playlists.id 
-            AND games.user_id = users.id")
-            ->fetchAll();
     }
 }

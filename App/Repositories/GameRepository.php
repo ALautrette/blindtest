@@ -52,6 +52,10 @@ class GameRepository extends Connector implements RepositoryInterface
 
     public function findAllWithRelations(): false|array
     {
-        return $this->findAllGamesWithRelations();
+        return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
+            FROM games, playlists, users
+            WHERE games.playlist_id = playlists.id 
+            AND games.user_id = users.id")
+            ->fetchAll();
     }
 }
