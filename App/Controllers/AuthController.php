@@ -26,7 +26,6 @@ class AuthController
         try {
             $_POST['password'] = crypt($_POST['password'], 'salt');
             $user = $this->userRepository->create($_POST);
-            session_start();
             $_SESSION['username'] = $user->username();
         } catch (\PDOException $e) {
             $message = $this->getErrorMessage($e);
@@ -52,7 +51,7 @@ class AuthController
             $user->verifyPassword($_POST['password']);
 
             $_SESSION['user'] = $user;
-            return require_once __DIR__ . '/../Views/dashboard.php';
+            header('Location: /dashboard');
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return require_once __DIR__ . '/../Views/Auth/login.php';

@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Connector;
 use App\Models\Music;
 
-class MusicRepository extends Connector implements RepositoryInterface
+class TagRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'musics';
     public function create($dataByColumns): Music

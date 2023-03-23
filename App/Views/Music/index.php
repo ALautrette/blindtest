@@ -1,0 +1,33 @@
+<?php
+
+use App\Models\Music;
+use App\Models\User;
+
+require_once 'App/Views/Layouts/BackOfficeMenu.php';
+?>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Artiste</th>
+      <th scope="col">Url</th>
+      <th scope="col">Timecode</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php /** @var Music[] $musics */
+    foreach ($musics as $music) { ?>
+      <tr>
+        <th scope="row"><?= $music->id() ?></th>
+        <td><?= $music->title() ?></td>
+        <td><?= $music->artist() ?></td>
+        <td><?= $music->url() ?></td>
+        <td><?= $music->timecode() ?></td>
+      </tr>
+    <?php } ?>
+
+  </tbody>
+</table>

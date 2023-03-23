@@ -2,6 +2,7 @@
 
 use App\Models\User;
 
+require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
 
 <table class="table">

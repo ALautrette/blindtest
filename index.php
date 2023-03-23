@@ -28,7 +28,21 @@ $router->post('/users/create', "User#create");
 $router->get('/register', "Auth#create");
 $router->post('/register', "Auth#store");
 
+$router->get('/musics', "Music#index");
+$router->get('/musics/create', "Music#createForm");
+
+$router->get('/tags', "Tag#index");
+$router->get('/tags/create', "Tag#createForm");
+
+$router->get('/playlists', "Playlist#index");
+$router->get('/playlists/create', "Playlist#createForm");
+
+$router->get('/games', "Game#index");
+$router->get('/games/create', "Game#createForm");
+
 $router->get('/login', "Auth#loginPage");
 $router->post('/login', "Auth#login");
+
+$router->get('/dashboard', "Dashboard#index");
 
 $router->run();
