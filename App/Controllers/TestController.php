@@ -47,4 +47,8 @@ class TestController
     {
         echo 'mon id est ' . $id;
     }
+
+    public function auth(){
+        echo 'methode auth';
+    }
 }

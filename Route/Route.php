@@ -2,12 +2,15 @@
 
 namespace Route;
 
+use Route\Middlewares\Middleware;
+
 class Route
 {
     private $path;
     private $callable;
     private $matches = [];
     private $params = [];
+    private $middleware;
 
     public function __construct($path, $callable)
     {
@@ -42,6 +45,9 @@ class Route
 
     public function call()
     {
+        if ($this->middleware && !$this->middleware->test()) {
+            return $this->middleware->deniedView();
+        }
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             $controller = "App\\Controllers\\" . $params[0] . "Controller";
@@ -51,6 +57,7 @@ class Route
             return call_user_func_array($this->callable, $this->matches);
         }
     }
+
 
     public function with($param, $regex)
     {
@@ -65,5 +72,12 @@ class Route
             $path = str_replace(":$k", $v, $path);
         }
         return $path;
+    }
+
+    public function middleware(Middleware $middleware)
+    {
+        $this->middleware = $middleware;
+
+        return $this;
     }
 }
