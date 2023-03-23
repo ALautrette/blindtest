@@ -26,6 +26,54 @@ class TagController
 
     public function create()
     {
-        //
+        try {
+            $this->tagRepository->create([
+                "name" => $_POST["name"],
+            ]);
+            $success = "Tag créé avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->createForm();
+        }
+    }
+
+    public function delete($id): void
+    {
+        try {
+            $this->tagRepository->delete($id);
+            $success = "Tag supprimé avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+
+    }
+
+    public function updateForm($id)
+    {
+        $tag = $this->tagRepository->find($id);
+        require_once __DIR__ . '/../Views/Tag/update.php';
+    }
+
+    public function update($id)
+    {
+        try {
+            $this->tagRepository->update($id, [
+                "name" => $_POST["name"],
+            ]);
+            $success = "Tag modifié avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->updateForm($id);
+        }
     }
 }

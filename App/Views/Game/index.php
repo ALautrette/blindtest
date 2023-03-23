@@ -26,8 +26,8 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
             <td><?= $game['host_username'] ?></td>
             <td><?= $game['date'] ?></td>
             <td>
-                <a href="<?= "/games/" . $game['id'] . "/delete" ?>">Supprimer</a>
-                <a href="<?= "/games/" . $game['id'] . "/update" ?>">Modifier</a>
+                <a href="/games/<?= $game['id'] ?>/update" class="btn btn-primary">Modifier</a>
+                <a href="/games/<?= $game['id'] ?>/delete" class="btn btn-danger">Supprimer</a>
             </td>
         </tr>
     <?php } ?>
