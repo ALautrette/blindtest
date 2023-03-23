@@ -9,6 +9,8 @@ class User
         private string $username,
         private string $email,
         private string $password,
+        private ?string $reset_token,
+        private ?string $token_expiry,
         private bool $isAdmin,
     ) {
     }
@@ -28,9 +30,19 @@ class User
         return $this->email;
     }
 
+    public function reset_token(): string
+    {
+        return $this->reset_token;
+    }
+
     public function password(): string
     {
         return $this->password;
+    }
+
+    public function token_expiry(): string
+    {
+        return $this->token_expiry;
     }
 
     public function isAdmin(): bool

@@ -4,10 +4,10 @@ use Route\Middlewares\AdminMiddleware;
 use Route\Middlewares\AuthMiddleware;
 use Route\Router;
 
-require_once('Config/config.php');
-require_once './App/Views/Layouts/head.php';
 require_once './App/Models/User.php';
 session_start();
+require_once('Config/config.php');
+require_once './App/Views/Layouts/head.php';
 
 spl_autoload_register(function ($class_name) {
     $class_name = str_replace("\\", "/", $class_name);
@@ -48,6 +48,11 @@ $router->get('/games/create', "Game#createForm");
 $router->get('/login', "Auth#loginPage");
 $router->post('/login', "Auth#login");
 
+$router->get("/reset", "Auth#resetPage");
+$router->post("/reset", "Auth#reset");
+
+$router->get("/newpassword", "Auth#newPwdPage");
+$router->post("/newpassword", "Auth#newPwd");
 
 $router->get('/dashboard', "Dashboard#index");
 

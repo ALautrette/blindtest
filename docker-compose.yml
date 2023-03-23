@@ -3,13 +3,13 @@ services:
     image: mysql:8.0
     container_name: db
     restart: always
-    ports: ['3306:3306']
+    ports: ["3306:3306"]
     volumes:
-      - db_data:/var/lib/mysql
+      # - db_data:/var/lib/mysql
       - ./blindtest.sql:/docker-entrypoint-initdb.d/blindtest.sql
     environment:
       MYSQL_DATABASE: blindtest
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
       MYSQL_ROOT_PASSWORD:
 
   phpmyadmin:
@@ -30,11 +30,11 @@ services:
       dockerfile: docker/Dockerfile
     container_name: app
     restart: always
-    depends_on: ['db']
-    ports: ['80:80']
-    links: ['db:db']
+    depends_on: ["db"]
+    ports: ["80:80"]
+    links: ["db:db"]
     volumes:
-      - '.:/var/www/html'
+      - ".:/var/www/html"
 
 volumes:
   db_data:
