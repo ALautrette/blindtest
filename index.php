@@ -1,11 +1,12 @@
 <?php
 
+use Route\Middlewares\AdminMiddleware;
 use Route\Middlewares\AuthMiddleware;
 use Route\Router;
 
 require_once('Config/config.php');
 require_once './App/Views/Layouts/head.php';
-
+require_once './App/Models/User.php';
 session_start();
 
 spl_autoload_register(function ($class_name) {
@@ -22,6 +23,7 @@ $router->get('/posts/:id', function ($id) {
 });
 $router->get('/test', "Test#show");
 $router->get('/test/auth', 'Test#auth')->middleware(new AuthMiddleware());
+$router->get('/test/admin', 'Test#auth')->middleware(new AdminMiddleware());
 $router->get('/test/:id', "Test#acces");
 
 
@@ -45,6 +47,7 @@ $router->get('/games/create', "Game#createForm");
 
 $router->get('/login', "Auth#loginPage");
 $router->post('/login', "Auth#login");
+
 
 $router->get('/dashboard', "Dashboard#index");
 

@@ -12,7 +12,7 @@ class AdminMiddleware extends Middleware
 
     public function test(): bool
     {
-        if(isset($_SESSION['user'])){
+        if(!isset($_SESSION['user'])){
             return false;
         }
         return $_SESSION['user']->isAdmin();
