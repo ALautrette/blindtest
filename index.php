@@ -38,7 +38,7 @@ $router->get('/musics/create', "Music#createForm")->middleware(new AuthMiddlewar
 $router->post('/musics/create', "Music#create")->middleware(new AuthMiddleware());
 $router->get('/musics/:id/update', "Music#updateForm")->middleware(new AuthMiddleware());
 $router->post('/musics/:id/update', "Music#update")->middleware(new AuthMiddleware());
-$router->post('/musics/:id/delete', "Music#delete")->middleware(new AuthMiddleware());
+$router->get('/musics/:id/delete', "Music#delete")->middleware(new AuthMiddleware());
 
 $router->get('/tags', "Tag#index");
 $router->get('/tags/create', "Tag#createForm");
@@ -51,7 +51,7 @@ $router->get('/games/create', "Game#createForm")->middleware(new AuthMiddleware(
 $router->post('/games/create', "Game#create")->middleware(new AuthMiddleware());
 $router->get('/games/:id/update', "Game#updateForm")->middleware(new AuthMiddleware());
 $router->post('/games/:id/update', "Game#update")->middleware(new AuthMiddleware());
-$router->post('/games/:id/delete', "Game#delete")->middleware(new AuthMiddleware());
+$router->get('/games/:id/delete', "Game#delete")->middleware(new AuthMiddleware());
 
 $router->get('/login', "Auth#loginPage");
 $router->post('/login', "Auth#login");

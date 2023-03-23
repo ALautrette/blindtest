@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Repositories\MusicRepository;
 use App\Repositories\TagRepository;
 use App\Repositories\PlaylistRepository;
 
 class MusicController
 {
     public function __construct(
-        private TagRepository $musicRepository = new TagRepository(),
+        private MusicRepository $musicRepository = new MusicRepository(),
     ) {
     }
 
@@ -33,6 +34,9 @@ class MusicController
                 "artist" => $_POST["artist"],
                 "timecode" => $_POST["timecode"],
             ]);
+            $success = "Musique créée avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
         } catch (PDOException $e) {
             $error = $e->getMessage();
             require_once __DIR__ . '/../Views/Components/alert-error.php';

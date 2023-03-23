@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Connector;
 use App\Models\Music;
 
-class TagRepository extends Connector implements RepositoryInterface
+class MusicRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'musics';
     public function create($dataByColumns): Music
@@ -31,7 +31,6 @@ class TagRepository extends Connector implements RepositoryInterface
         foreach ($musicsData as $musicData) {
             $musics[] = new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
         }
-
         return $musics;
     }
 

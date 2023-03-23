@@ -65,6 +65,8 @@ class GameController
     public function updateForm($id)
     {
         $game = $this->gameRepository->find($id);
+        $playlists = $this->playlistRepository->findAll();
+        $users = $this->userRepository->findAll();
         require_once __DIR__ . '/../Views/Game/update.php';
     }
 
