@@ -1,3 +1,6 @@
+<?php
+require_once 'App/Views/Layouts/BackOfficeMenu.php';
+?>
 <form method="POST" action="/playlists/create">
     <div class="form-group">
         <label for="">Nom de la playlist</label>
@@ -5,12 +8,14 @@
     </div>
 
     <div class="form-check">
-        <label class="form-check-label" for="exampleCheck1">Public ?</label>
+        <label class="form-check-label" for="exampleCheck1">Public</label>
         <input type="checkbox" class="form-check-input" id="exampleCheck1" name="is_public">
     </div>
-    <div id="container">
-        <select  class="form-select" id="select" name="musics[0]">
+    <div id="container" style="width: 50%">
+        <label for="select">Musiques</label>
+        <select class="form-select" id="select" name="musics[0]">
             <?php
+            /** @var \App\Models\Music[] $musics */
             var_dump($musics);
             foreach ($musics as $music) {
                 $id = $music->id();
@@ -38,5 +43,8 @@
         let container = document.getElementById('container');
         container.appendChild(clone);
         compteur++;
+        if(compteur >= 20){
+            add.remove();
+        }
     }
 </script>

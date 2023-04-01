@@ -46,14 +46,5 @@ class MusicRepository extends Connector implements RepositoryInterface
         $this->abstractDelete($this->tableName, $id);
     }
 
-    public function insertMusicPlaylist(int $musicId, int $playlistId)
-    {
-        $success = $this->pdo->prepare(
-            "insert into music_playlist (music_id, playlist_id) values (?, ?)"
-        )->execute([$musicId, $playlistId]);
 
-        if(!$success){
-            throw new PDOException('Failed to create data');
-        }
-    }
 }
