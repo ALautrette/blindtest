@@ -47,6 +47,9 @@ class PlaylistController
             foreach ($_POST['musics'] as $music) {
                 $this->playlistRepository->insertMusicPlaylist($music, $playlist->id());
             }
+            foreach ($_POST["tags"] as $tag){
+                $this->playlistRepository->insertTagPlaylist($tag, $playlist->id());
+            }
             $success = "Playlist créée avec succès";
             require_once __DIR__ . '/../Views/Components/alert-success.php';
             $this->index();
@@ -79,6 +82,7 @@ class PlaylistController
             $playlist = $this->playlistRepository->find($id);
             $musics = $this->playlistRepository->findMusics($id);
             $user = $this->userRepository->find($playlist->userId());
+            $tags= $this->playlistRepository->findTags($id);
             require_once __DIR__ . '/../Views/Playlist/show.php';
         } catch (PDOException $e) {
             $error = 'La playlist n\'a pas été trouvée';

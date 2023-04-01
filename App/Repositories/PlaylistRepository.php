@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Connector;
 use App\Models\Music;
 use App\Models\Playlist;
+use App\Models\Tag;
 use PDO;
 use PDOException;
 
@@ -76,9 +77,41 @@ class PlaylistRepository extends Connector implements RepositoryInterface
         $query->execute([$playlistId]);
         $musicData = $query->fetchAll(PDO::FETCH_ASSOC);
         $musics = [];
-        foreach ($musicData as $music){
+        foreach ($musicData as $music) {
             $musics[] = new Music($music["id"], $music["url"], $music["title"], $music["artist"], $music["timecode"]);
         }
         return $musics;
+    }
+
+    public function insertTagPlaylist(int $tagId, int $playlistId): int
+    {
+        $success = $this->pdo->prepare(
+            "insert into playlist_tag (tag_id, playlist_id) values (?, ?)"
+        )->execute([$tagId, $playlistId]);
+
+        if (!$success) {
+            throw new PDOException('Failed to create data');
+        }
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
+     * @param int $playlistId
+     * @return Tag[]
+     */
+    public function findTags(int $playlistId): array
+    {
+        $query = $this->pdo->prepare(
+            "select tags.id, tags.name
+            from tags inner join playlist_tag on tags.id = playlist_tag.tag_id 
+            where playlist_id = ?"
+        );
+        $query->execute([$playlistId]);
+        $tagData = $query->fetchAll(PDO::FETCH_ASSOC);
+        $tags = [];
+        foreach ($tagData as $tag) {
+            $tags[] = new Tag($tag["id"], $tag["name"]);
+        }
+        return $tags;
     }
 }

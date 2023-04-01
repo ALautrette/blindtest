@@ -51,3 +51,24 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
     </tbody>
 </table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Libellé</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php
+    /** @var \App\Models\Tag[] $tags */
+    foreach ($tags as $tag) { ?>
+        <tr>
+            <th scope="row"><?= $tag->id() ?></th>
+            <td><?= $tag->name() ?></td>
+        </tr>
+    <?php } ?>
+
+    </tbody>
+</table>
