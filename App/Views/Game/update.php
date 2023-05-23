@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
 ?>
 
-<form method="POST" action="/games/create">
+<form method="POST" action="<?='/games/' . $game->id() . '/update' ?>">
     <div class="form-group">
         <label for="date">Date</label>
         <input type="date" class="form-control" name="date" placeholder="Pick date">

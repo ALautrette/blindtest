@@ -4,41 +4,42 @@ namespace App\Repositories;
 
 use App\Connector;
 use App\Models\Music;
+use App\Models\Playlist;
 
 class PlaylistRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'playlists';
-    public function create($dataByColumns): Music
+    public function create($dataByColumns): Playlist
     {
-        $musicData = $this->abstractCreate($this->tableName, $dataByColumns);
-        return new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
+        $playlistData = $this->abstractCreate($this->tableName, $dataByColumns);
+        return new Playlist($playlistData['id'], $playlistData['name'], $playlistData['user_id'], $playlistData['is_public']);
     }
 
-    public function find(int $id, ?array $columns = null): Music
+    public function find(int $id, ?array $columns = null): Playlist
     {
-        $musicData = $this->abstractFind($this->tableName, $id, $columns);
-        return new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
+        $playlistData = $this->abstractFind($this->tableName, $id, $columns);
+        return new Playlist($playlistData['id'], $playlistData['name'], $playlistData['user_id'], $playlistData['is_public']);
     }
 
     /**
-     * @return Music[]
+     * @return Playlist[]
      */
     public function findAll(?array $columns = null): array
     {
-        $musicsData = $this->abstractFindAll($this->tableName, $columns);
+        $playlistsData = $this->abstractFindAll($this->tableName, $columns);
 
-        $musics = [];
-        foreach ($musicsData as $musicData) {
-            $musics[] = new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
+        $playlists = [];
+        foreach ($playlistsData as $playlistData) {
+            $playlists[] = new Playlist($playlistData['id'], $playlistData['name'], $playlistData['user_id'], $playlistData['is_public']);
         }
 
-        return $musics;
+        return $playlists;
     }
 
-    public function update(int $id, array $dataByColumns): Music
+    public function update(int $id, array $dataByColumns): Playlist
     {
-        $musicData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
-        return new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
+        $playlistData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
+        return new Playlist($playlistData['id'], $playlistData['name'], $playlistData['user_id'], $playlistData['is_public']);
     }
 
     public function delete(int $id)

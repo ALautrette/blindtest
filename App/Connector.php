@@ -7,7 +7,7 @@ use PDOException;
 
 class Connector
 {
-    private ?PDO $pdo;
+    protected ?PDO $pdo;
 
     public function __construct()
     {
@@ -60,7 +60,7 @@ class Connector
 
     protected function abstractUpdate(string $table, int $id, array $dataByColumns): array
     {
-        $columnsToUpdate = implode(',', array_map(fn ($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
+        $columnsToUpdate = implode(',', array_map(fn($columnName) => "$columnName = :$columnName", array_keys($dataByColumns)));
         $sql = "UPDATE $table SET $columnsToUpdate WHERE id = :id";
         $success = $this->pdo
             ->prepare($sql)
