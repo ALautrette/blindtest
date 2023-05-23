@@ -26,10 +26,9 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
             <td><?= $playlist->userId() ?></td>
             <td><?= $playlist->isPublic() ? "oui" : "non" ?></td>
             <td>
-                <a class="btn btn-outline-primary" href="/playlists/<?= $playlist->id() ?>"><img src="<?=
-                    $GLOBALS['IMG'] . "/eye.svg" ?>"></a>
-                <a class="btn btn-outline-danger" href="/playlists/delete/<?= $playlist->id() ?>"><img src="<?=
-                    $GLOBALS['IMG'] . "/trash.svg" ?>"> </a>
+                <a class="btn btn-outline-primary" href="/playlists/<?= $playlist->id() ?>"><i class="fa-solid fa-eye"></i></a>
+                <a class="btn btn-outline-danger" href="/playlists/delete/<?= $playlist->id() ?>"><i class="fa-solid fa-trash"></i>
+                </a>
 
             </td>
         </tr>
