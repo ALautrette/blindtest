@@ -24,7 +24,7 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
             <th scope="row"><?= $game['id'] ?></th>
             <td><?= $game['playlist_name'] ?></td>
             <td><?= $game['host_username'] ?></td>
-            <td><?= $game['date'] ?></td>
+            <td><?php $date = new DateTime($game['date']); echo $date->format('d/m/Y \à H\hi') ?></td>
             <td>
                 <a href="/games/<?= $game['id'] ?>/update" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                 <a href="/games/<?= $game['id'] ?>/delete" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
