@@ -9,7 +9,8 @@ class Playlist
         private string $name,
         private int $userId,
         private bool $isPublic,
-    ) {}
+    ) {
+    }
 
     public function id(): int
     {

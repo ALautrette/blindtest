@@ -1,13 +1,16 @@
 <?php
+
 namespace Route;
+
+use Route\Middlewares\Middleware;
 
 class Route
 {
-
     private $path;
     private $callable;
     private $matches = [];
     private $params = [];
+    private $middleware;
 
     public function __construct($path, $callable)
     {
@@ -16,7 +19,7 @@ class Route
     }
 
     /**
-     * Permettra de capturer l'url avec les paramètre 
+     * Permettra de capturer l'url avec les paramètre
      * get('/posts/:slug-:id') par exemple
      **/
     public function match($url)
@@ -39,9 +42,13 @@ class Route
         }
         return '([^/]+)';
     }
-    
-    public function call(){
-        if(is_string($this->callable)){
+
+    public function call()
+    {
+        if ($this->middleware && !$this->middleware->test()) {
+            return $this->middleware->deniedView();
+        }
+        if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             $controller = "App\\Controllers\\" . $params[0] . "Controller";
             $controller = new $controller();
@@ -51,17 +58,26 @@ class Route
         }
     }
 
+
     public function with($param, $regex)
     {
         $this->params[$param] = str_replace('(', '(?:', $regex);
         return $this; // On retourne tjrs l'objet pour enchainer les arguments
     }
 
-    public function getUrl($params){
+    public function getUrl($params)
+    {
         $path = $this->path;
-        foreach($params as $k => $v){
+        foreach ($params as $k => $v) {
             $path = str_replace(":$k", $v, $path);
         }
         return $path;
+    }
+
+    public function middleware(Middleware $middleware)
+    {
+        $this->middleware = $middleware;
+
+        return $this;
     }
 }

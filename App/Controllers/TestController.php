@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Connector;
 use App\Repositories\UserRepository;
 
 class TestController
@@ -47,5 +46,9 @@ class TestController
     public function acces($id)
     {
         echo 'mon id est ' . $id;
+    }
+
+    public function auth(){
+        echo 'methode auth';
     }
 }

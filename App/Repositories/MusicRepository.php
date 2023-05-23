@@ -8,6 +8,7 @@ use App\Models\Music;
 class MusicRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'musics';
+
     public function create($dataByColumns): Music
     {
         $musicData = $this->abstractCreate($this->tableName, $dataByColumns);
@@ -26,12 +27,11 @@ class MusicRepository extends Connector implements RepositoryInterface
     public function findAll(?array $columns = null): array
     {
         $musicsData = $this->abstractFindAll($this->tableName, $columns);
-        
+
         $musics = [];
         foreach ($musicsData as $musicData) {
             $musics[] = new Music($musicData['id'], $musicData['url'], $musicData['title'], $musicData['artist'], $musicData['timecode']);
         }
-        
         return $musics;
     }
 
@@ -45,4 +45,6 @@ class MusicRepository extends Connector implements RepositoryInterface
     {
         $this->abstractDelete($this->tableName, $id);
     }
+
+
 }

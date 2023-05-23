@@ -10,7 +10,8 @@ class Music
         private string $title,
         private string $artist,
         private int $timecode,
-    ) {}
+    ) {
+    }
 
     public function id(): string
     {

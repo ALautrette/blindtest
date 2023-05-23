@@ -4,7 +4,6 @@ namespace Route;
 
 class Router
 {
-
     private $url;
     private $routes = [];
     private $namedRoutes = [];
