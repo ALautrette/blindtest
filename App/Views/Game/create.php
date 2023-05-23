@@ -5,7 +5,7 @@ require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
 <form method="POST" action="/games/create">
     <div class="form-group">
         <label for="date">Date</label>
-        <input type="date" class="form-control" name="date" placeholder="Pick date">
+        <input type="datetime-local" class="form-control" name="date" placeholder="Pick date">
     </div>
     <div class="form-group">
         <label for="playlist_id">Playlist liée</label>

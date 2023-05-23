@@ -5,6 +5,7 @@ use App\Models\User;
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
 
+<a href="/users/create" class="btn btn-primary">Créer un utilisateur</a>
 <table class="table">
   <thead>
     <tr>
@@ -13,6 +14,7 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
       <th scope="col">Email</th>
       <th scope="col">Password</th>
       <th scope="col">Admin</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -25,6 +27,10 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
         <td><?= $user->email() ?></td>
         <td><?= $user->password() ?></td>
         <td><?= $user->isAdmin() ?></td>
+          <td>
+              <a href="/users/<?= $user->id() ?>/update" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="/users/<?= $user->id() ?>/delete" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+          </td>
       </tr>
     <?php } ?>
 

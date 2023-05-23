@@ -58,14 +58,27 @@ class UserController
 
     }
 
-    public function show($id){
-        try{
-            $user = $this->userRepository->find($id);
-            require_once __DIR__ . '/../Views/User/show.php';
-        } catch (PDOException $e){
-            $error = 'L\'utilisateur n\'a pas été trouvé';
-            require_once __DIR__ . '/../Views/Components/alert-error.php';
+    public function updateForm($id)
+    {
+        $user = $this->userRepository->find($id);
+        require_once __DIR__ . '/../Views/User/update.php';
+    }
+
+    public function update($id)
+    {
+        try {
+            $this->userRepository->update($id, [
+                "username" => $_POST["username"],
+                "email" => $_POST["email"],
+                "is_admin" => isset($_POST["is_admin"]) ? 1 : 0,
+            ]);
+            $success = "Utilisateur modifié avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
             $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->updateForm($id);
         }
     }
 }

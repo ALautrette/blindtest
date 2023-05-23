@@ -5,7 +5,7 @@ use App\Models\User;
 
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
-
+<a href="/tags/create" class="btn btn-primary">Créer un tag</a>
 <table class="table">
   <thead>
     <tr>
@@ -22,8 +22,8 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
         <th scope="row"><?= $tag->id() ?></th>
         <td><?= $tag->name() ?></td>
         <td>
-          <a href="/tags/<?= $tag->id() ?>/update" class="btn btn-primary">Modifier</a>
-          <a href="/tags/<?= $tag->id() ?>/delete" class="btn btn-danger">Supprimer</a>
+          <a href="/tags/<?= $tag->id() ?>/update" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+          <a href="/tags/<?= $tag->id() ?>/delete" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
         </td>
       </tr>
     <?php } ?>

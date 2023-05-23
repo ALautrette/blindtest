@@ -30,6 +30,9 @@ $router->get('/test/:id', "Test#acces");
 $router->get('/users', "User#index");
 $router->get('/users/create', "User#createForm");
 $router->post('/users/create', "User#create");
+$router->get('/users/:id/update', "User#updateForm");
+$router->post('/users/:id/update', "User#update");
+$router->get('/users/:id/delete', "User#delete");
 $router->get('/register', "Auth#create");
 $router->post('/register', "Auth#store");
 
