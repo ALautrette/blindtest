@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL UNIQUE,
   `password` varchar(50) NOT NULL,
   `is_admin` tinyint(4) DEFAULT '0',
+  `reset_token` VARCHAR(256) NULL UNIQUE,    
+  `token_expiry` DATETIME NULL,   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
