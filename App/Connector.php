@@ -41,11 +41,16 @@ class Connector
     protected function abstractFind(string $table, int $id, ?array $columns = null): array
     {
         if ($columns === null) {
-            return $this->pdo->query("SELECT * FROM $table WHERE id = $id")->fetch();
+            $result = $this->pdo->query("SELECT * FROM $table WHERE id = $id")->fetch();
+        } else {
+            $columns = implode(',', $columns);
+            $result = $this->pdo->query("SELECT $columns FROM $table WHERE id = $id")->fetch();
         }
-
-        $columns = implode(',', $columns);
-        return $this->pdo->query("SELECT $columns FROM $table WHERE id = $id")->fetch();
+        if ($result) {
+            return $result;
+        } else {
+            throw new PDOException("La requête a échouée");
+        }
     }
 
     protected function abstractFindBy(string $table, string $column, string $value, ?array $columns = null): array|false

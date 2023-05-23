@@ -5,27 +5,35 @@ use App\Models\User;
 
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
-
+<a href="/playlists/create" class="btn btn-primary">Créer une playlist</a>
 <table class="table">
-  <thead>
+    <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Créateur</th>
-      <th scope="col">Publique</th>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Créateur</th>
+        <th scope="col">Publique</th>
+        <th></th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
 
     <?php /** @var Playlist[] $playlists */
     foreach ($playlists as $playlist) { ?>
-      <tr>
-        <th scope="row"><?= $playlist->id() ?></th>
-          <td><?= $playlist->name() ?></td>
-          <td><?= $playlist->userId() ?></td>
-          <td><?= $playlist->isPublic() ?></td>
-      </tr>
+        <tr>
+            <th scope="row"><?= $playlist->id() ?></th>
+            <td><?= $playlist->name() ?></td>
+            <td><?= $playlist->userId() ?></td>
+            <td><?= $playlist->isPublic() ? "oui" : "non" ?></td>
+            <td>
+                <a class="btn btn-outline-primary" href="/playlists/<?= $playlist->id() ?>"><img src="<?=
+                    $GLOBALS['IMG'] . "/eye.svg" ?>"></a>
+                <a class="btn btn-outline-danger" href="/playlists/delete/<?= $playlist->id() ?>"><img src="<?=
+                    $GLOBALS['IMG'] . "/trash.svg" ?>"> </a>
+
+            </td>
+        </tr>
     <?php } ?>
 
-  </tbody>
+    </tbody>
 </table>

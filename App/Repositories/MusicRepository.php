@@ -8,6 +8,7 @@ use App\Models\Music;
 class MusicRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'musics';
+
     public function create($dataByColumns): Music
     {
         $musicData = $this->abstractCreate($this->tableName, $dataByColumns);
@@ -44,4 +45,6 @@ class MusicRepository extends Connector implements RepositoryInterface
     {
         $this->abstractDelete($this->tableName, $id);
     }
+
+
 }

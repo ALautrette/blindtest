@@ -47,8 +47,11 @@ $router->get('/tags/:id/update', "Tag#updateForm");
 $router->post('/tags/:id/update', "Tag#update");
 $router->get('/tags/:id/delete', "Tag#delete");
 
-$router->get('/playlists', "Playlist#index");
-$router->get('/playlists/create', "Playlist#createForm");
+$router->get('/playlists', "Playlist#index")->middleware(new AdminMiddleware());
+$router->get('/playlists/create', "Playlist#createForm")->middleware(new AdminMiddleware());
+$router->post('/playlists/create', "Playlist#create")->middleware(new AdminMiddleware());
+$router->get('/playlists/delete/:id', "Playlist#delete")->middleware(new AdminMiddleware());
+$router->get('/playlists/:id', "Playlist#show");
 
 $router->get('/games', "Game#index")->middleware(new AuthMiddleware());
 $router->get('/games/create', "Game#createForm")->middleware(new AuthMiddleware());
@@ -69,3 +72,5 @@ $router->post("/newpassword", "Auth#newPwd");
 $router->get('/dashboard', "Dashboard#index");
 
 $router->run();
+
+require_once './App/Views/Layouts/footer.php';
