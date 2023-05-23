@@ -47,7 +47,8 @@ class PlaylistController
             foreach ($_POST['musics'] as $music) {
                 $this->playlistRepository->insertMusicPlaylist($music, $playlist->id());
             }
-            foreach ($_POST["tags"] as $tag){
+            $tags = array_unique($_POST["tags"]);
+            foreach ($tags as $tag){
                 $this->playlistRepository->insertTagPlaylist($tag, $playlist->id());
             }
             $success = "Playlist créée avec succès";
