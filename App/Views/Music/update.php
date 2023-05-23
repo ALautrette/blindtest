@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
 ?>
 
-<form method="POST" action="/musics/create">
+<form method="POST" action="<?='/musics/' . $music->id() . '/update' ?>">
     <div class="form-group">
         <label for="url">Url</label>
         <input type="text" class="form-control" name="url" placeholder="youtube.com/exemple">

@@ -38,7 +38,7 @@ class TagRepository extends Connector implements RepositoryInterface
     public function update(int $id, array $dataByColumns): Tag
     {
         $tagData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
-        return new Tag($tagData['id'], $tagData['url'], $tagData['title'], $tagData['artist'], $tagData['timecode']);
+        return new Tag($tagData['id'], $tagData['name']);
     }
 
     public function delete(int $id)

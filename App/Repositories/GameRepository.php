@@ -35,6 +35,10 @@ class GameRepository extends Connector implements RepositoryInterface
         return $games;
     }
 
+    /**
+     * @return Game[]
+     */
+
     public function update(int $id, array $dataByColumns): Game
     {
         $gameData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
@@ -44,5 +48,14 @@ class GameRepository extends Connector implements RepositoryInterface
     public function delete(int $id)
     {
         $this->abstractDelete($this->tableName, $id);
+    }
+
+    public function findAllWithRelations(): false|array
+    {
+        return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
+            FROM games, playlists, users
+            WHERE games.playlist_id = playlists.id 
+            AND games.user_id = users.id")
+            ->fetchAll();
     }
 }
