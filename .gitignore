@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+vendor/
 
 docker/storage/*
 Config/config.php
