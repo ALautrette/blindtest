@@ -1,3 +1,6 @@
+<?php
+    include 'App/Views/Layouts/head.php';
+?>
 <form method="POST" action="<?='/users/' . $user->id() . '/update'?>">
     <div class="form-group">
         <label for="exampleInputEmail1">Username</label>
@@ -13,3 +16,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<?php
+    include 'App/Views/Layouts/footer.php';
+?>

@@ -1,5 +1,6 @@
 <?php
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
 <form method="POST" action="/playlists/create">
     <div class="form-group">
@@ -86,3 +87,6 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
         }
     }
 </script>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

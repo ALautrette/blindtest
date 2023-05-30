@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Game;
-use App\Models\User;
-
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
 <a href="/games/create" class="btn btn-primary">Créer une partie</a>
 <table class="table">
@@ -34,3 +32,6 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
     </tbody>
 </table>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>
