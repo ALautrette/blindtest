@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Music;
-use App\Models\User;
 
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
 <a href="/musics/create" class="btn btn-primary">Ajouter une musique</a>
 <table class="table">
@@ -37,3 +37,6 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
     </tbody>
 </table>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

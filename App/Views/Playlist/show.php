@@ -3,7 +3,10 @@
 use App\Models\Playlist;
 use App\Models\Music;
 
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+
+include 'App/Views/Layouts/head.php';
+
 ?>
 <table class="table">
     <thead>
@@ -72,3 +75,6 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
     </tbody>
 </table>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

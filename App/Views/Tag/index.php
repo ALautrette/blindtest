@@ -3,7 +3,8 @@
 use App\Models\Tag;
 use App\Models\User;
 
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
 <a href="/tags/create" class="btn btn-primary">Créer un tag</a>
 <table class="table">
@@ -30,3 +31,6 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
   </tbody>
 </table>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

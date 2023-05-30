@@ -2,7 +2,9 @@
 
 use App\Models\User;
 
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
+
 ?>
 
 <a href="/users/create" class="btn btn-primary">Créer un utilisateur</a>
@@ -36,3 +38,7 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
 
   </tbody>
 </table>
+
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

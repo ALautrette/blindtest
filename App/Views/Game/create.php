@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
 
 <form method="POST" action="/games/create">
@@ -25,3 +25,6 @@ require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>
