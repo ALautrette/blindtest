@@ -67,4 +67,13 @@ class UserRepository extends Connector implements RepositoryInterface
         }
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password'], $userData['reset_token'], $userData['token_expiry'], $userData['is_admin']);
     }
+
+    public function findByUsername(string $username, ?array $columns = null): User
+    {
+        $userData = $this->abstractFindBy($this->tableName, 'username', $username, $columns);
+        if ($userData === false) {
+            throw new \Exception('Invalid username');
+        }
+        return new User($userData['id'], $userData['username'], $userData['email'], $userData['password'], $userData['reset_token'], $userData['token_expiry'], $userData['is_admin']);
+    }
 }
