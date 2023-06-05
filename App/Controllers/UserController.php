@@ -55,7 +55,6 @@ class UserController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->index();
         }
-
     }
 
     public function updateForm($id)

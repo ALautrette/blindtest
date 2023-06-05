@@ -24,7 +24,7 @@ include 'App/Views/Layouts/head.php';
                         $title = $music->title();
                         echo "<option value='$id'>$title</option>";
                     }
-                    ?>
+?>
                 </select>
             </div>
             <button id="addM" type="button" class="btn btn-secondary">Ajouter une musique</button>
@@ -35,13 +35,13 @@ include 'App/Views/Layouts/head.php';
                 <select class="form-control" id="selectT" name="tags[0]">
                     <?php
 
-                    /** @var \App\Models\Tag[] $tags */
-                    foreach ($tags as $tag) {
-                        $id = $tag->id();
-                        $title = $tag->name();
-                        echo "<option value='$id'>$title</option>";
-                    }
-                    ?>
+/** @var \App\Models\Tag[] $tags */
+foreach ($tags as $tag) {
+    $id = $tag->id();
+    $title = $tag->name();
+    echo "<option value='$id'>$title</option>";
+}
+?>
                 </select>
             </div>
             <button id="addT" type="button" class="btn btn-info">Ajouter un tag</button>

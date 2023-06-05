@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Repositories\TagRepository;
-use App\Repositories\PlaylistRepository;
 
 class TagController
 {
@@ -52,7 +51,6 @@ class TagController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->index();
         }
-
     }
 
     public function updateForm($id)

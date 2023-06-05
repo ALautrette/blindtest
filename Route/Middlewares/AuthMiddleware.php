@@ -11,7 +11,6 @@ class AuthMiddleware extends Middleware
 
     public function deniedView(): void
     {
-
         echo 'Access Denied';
     }
 }

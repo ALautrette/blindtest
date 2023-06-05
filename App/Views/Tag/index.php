@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Tag;
-use App\Models\User;
 
 include 'App/Views/Layouts/BackOfficeMenu.php';
 include 'App/Views/Layouts/head.php';

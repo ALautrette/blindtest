@@ -15,28 +15,24 @@ class PlaylistController
         private MusicRepository    $musicRepository = new MusicRepository(),
         private TagRepository      $tagRepository = new TagRepository(),
         private UserRepository     $userRepository = new UserRepository(),
-    )
-    {
+    ) {
     }
 
 
-    public
-    function index(): void
+    public function index(): void
     {
         $playlists = $this->playlistRepository->findAll();
         require_once __DIR__ . '/../Views/Playlist/index.php';
     }
 
-    public
-    function createForm(): void
+    public function createForm(): void
     {
         $musics = $this->musicRepository->findAll();
         $tags = $this->tagRepository->findAll();
         require_once __DIR__ . '/../Views/Playlist/create.php';
     }
 
-    public
-    function create(): void
+    public function create(): void
     {
         try {
             $playlist = $this->playlistRepository->create([
@@ -48,7 +44,7 @@ class PlaylistController
                 $this->playlistRepository->insertMusicPlaylist($music, $playlist->id());
             }
             $tags = array_unique($_POST["tags"]);
-            foreach ($tags as $tag){
+            foreach ($tags as $tag) {
                 $this->playlistRepository->insertTagPlaylist($tag, $playlist->id());
             }
             $success = "Playlist créée avec succès";
@@ -61,8 +57,7 @@ class PlaylistController
         }
     }
 
-    public
-    function delete($id): void
+    public function delete($id): void
     {
         try {
             $this->playlistRepository->delete($id);
@@ -76,8 +71,7 @@ class PlaylistController
         }
     }
 
-    public
-    function show($id): void
+    public function show($id): void
     {
         try {
             $playlist = $this->playlistRepository->find($id);
@@ -91,6 +85,4 @@ class PlaylistController
             $this->index();
         }
     }
-
-
 }

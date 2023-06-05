@@ -97,8 +97,6 @@ class AuthController
     public function newPwdPage()
     {
         try {
-
-
             if (empty($_GET['token'])) {
                 $message = 'No token was provided';
                 return require_once __DIR__ . '/../Views/Auth/reset.php';

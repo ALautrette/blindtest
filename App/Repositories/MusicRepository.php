@@ -45,6 +45,4 @@ class MusicRepository extends Connector implements RepositoryInterface
     {
         $this->abstractDelete($this->tableName, $id);
     }
-
-
 }
