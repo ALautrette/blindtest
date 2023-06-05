@@ -124,4 +124,16 @@ class PlaylistRepository extends Connector implements RepositoryInterface
     {
         $query = $this->pdo->prepare("delete from playlist_tag where tag_id = ? and playlist_id = ?")->execute([$tagId, $playlistId]);
     }
+
+    public function findUserPlaylists(int $userId): array
+    {
+        $playlistsData = $this->abstractWhere($this->tableName, ['user_id' => $userId]);
+
+        $playlists = [];
+        foreach ($playlistsData as $playlistData) {
+            $playlists[] = new Playlist($playlistData['id'], $playlistData['name'], $playlistData['user_id'], $playlistData['is_public']);
+        }
+
+        return $playlists;
+    }
 }
