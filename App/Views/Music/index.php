@@ -2,9 +2,10 @@
 
 use App\Models\Music;
 
-require_once 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
-
+<a href="/musics/create" class="btn btn-primary">Ajouter une musique</a>
 <table class="table">
     <thead>
     <tr>
@@ -28,11 +29,14 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
             <td><?= $music->url() ?></td>
             <td><?= $music->timecode() ?></td>
             <td>
-                <a href="/musics/<?= $music->id() ?>/update" class="btn btn-primary">Modifier</a>
-                <a href="/musics/<?= $music->id() ?>/delete" class="btn btn-danger">Supprimer</a>
+                <a href="/musics/<?= $music->id() ?>/update" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="/musics/<?= $music->id() ?>/delete" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
             </td>
         </tr>
     <?php } ?>
 
     </tbody>
 </table>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

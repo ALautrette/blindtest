@@ -33,19 +33,18 @@ class GameController
     public function create()
     {
         try {
-            $this->gameRepository->create([
+            $game = $this->gameRepository->create([
                 "date" => $_POST["date"],
                 "playlist_id" => $_POST["playlist_id"],
-                "user_id" => $_POST["user_id"],
+                "user_id" => $_POST["owner_id"],
             ]);
-            $success = "Partie créée avec succès";
-            require_once __DIR__ . '/../Views/Components/alert-success.php';
-            $this->index();
+
+            $this->gameRepository->addUsers($game->id(), $_POST["user_ids"]);
         } catch (PDOException $e) {
             $error = $e->getMessage();
-            require_once __DIR__ . '/../Views/Components/alert-error.php';
-            $this->createForm();
+            return json_encode($error);
         }
+        return json_encode("Game created");
     }
 
     public function delete($id): void
@@ -86,5 +85,16 @@ class GameController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->updateForm($id);
         }
+    }
+
+    public function updateUserScore(): false|string
+    {
+        try {
+            $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            return json_encode($error);
+        }
+        return json_encode("Score updated");
     }
 }

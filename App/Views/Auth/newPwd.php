@@ -1,3 +1,6 @@
+<?php
+include 'App/Views/Layouts/head.php';
+?>
 <div>
     <h1>Enter your new password</h1>
     <form action="/newpassword" method="post">
@@ -14,3 +17,6 @@
         <p><?= $message ?></p>
     <?php endif; ?>
 </div>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

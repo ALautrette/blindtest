@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
 
 <form method="POST" action="/games/create">
     <div class="form-group">
         <label for="date">Date</label>
-        <input type="date" class="form-control" name="date" placeholder="Pick date">
+        <input type="datetime-local" class="form-control" name="date" placeholder="Pick date">
     </div>
     <div class="form-group">
         <label for="playlist_id">Playlist liée</label>
@@ -25,3 +25,6 @@ require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

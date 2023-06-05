@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+include 'App/Views/Layouts/head.php';
+?>
 
 <section class="min-vh-100 gradient-custom">
     <div class="container py-5 h-100">
@@ -44,3 +46,7 @@
         </div>
     </div>
 </section>
+
+<?php
+include 'App/Views/Layouts/footer.php';
+?>

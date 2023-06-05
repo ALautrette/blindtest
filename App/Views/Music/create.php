@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/BackOfficeMenu.php';
+include 'App/Views/Layouts/head.php';
 ?>
 
 <form method="POST" action="/musics/create">
@@ -21,3 +22,6 @@ require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>
