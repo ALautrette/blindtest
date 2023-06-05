@@ -21,7 +21,11 @@ class PlaylistController
 
     public function index(): void
     {
-        $playlists = $this->playlistRepository->findAll();
+        if($_SESSION['user']->isAdmin()){
+            $playlists = $this->playlistRepository->findAll();
+        } else {
+            $playlists = $this->playlistRepository->findUserPlaylists($_SESSION['user']->id());
+        }
         require_once __DIR__ . '/../Views/Playlist/index.php';
     }
 
@@ -74,13 +78,68 @@ class PlaylistController
     public function show($id): void
     {
         try {
+            $musics = $this->musicRepository->findAll();
+            $tags = $this->tagRepository->findAll();
             $playlist = $this->playlistRepository->find($id);
-            $musics = $this->playlistRepository->findMusics($id);
+            $musicsPlaylist = $this->playlistRepository->findMusics($id);
             $user = $this->userRepository->find($playlist->userId());
-            $tags= $this->playlistRepository->findTags($id);
+            $tagsPlaylist = $this->playlistRepository->findTags($id);
             require_once __DIR__ . '/../Views/Playlist/show.php';
         } catch (PDOException $e) {
             $error = 'La playlist n\'a pas été trouvée';
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+    }
+
+    public function update($id): void
+    {
+        try {
+            $playlist = $this->playlistRepository->find($id);
+            if (isset($_POST['musics'])) {
+                foreach ($_POST['musics'] as $music) {
+                    $this->playlistRepository->insertMusicPlaylist($music, $playlist->id());
+                }
+            }
+            if (isset($_POST['tags'])) {
+                $tags = array_unique($_POST["tags"]);
+                foreach ($tags as $tag) {
+                    $val = $this->playlistRepository->insertTagPlaylist($tag, $playlist->id());
+                }
+            }
+            $success = "Playlist mise à jour avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->show($id);
+        } catch (PDOException  $e) {
+            $error = 'La playlist n\'a pas été trouvée';
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+    }
+
+    public function deleteMusic($id, $idMusic): void
+    {
+        try {
+            $this->playlistRepository->removeMusic($idMusic, $id);
+            $success = "Music suprimée";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->show($id);
+        } catch (PDOException $e) {
+            $error = 'Une erreur est survenue';
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->index();
+        }
+    }
+
+    public function deleteTag($id, $idTag): void
+    {
+        try {
+            $this->playlistRepository->removeTag($idTag, $id);
+            $success = "Tag suprimé";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->show($id);
+        } catch (PDOException $e) {
+            $error = 'Une erreur est survenue';
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->index();
         }

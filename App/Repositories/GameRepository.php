@@ -71,4 +71,13 @@ class GameRepository extends Connector implements RepositoryInterface
     {
         $this->pdo->query("UPDATE game_user SET score = score + 1 WHERE game_id = $gameId AND user_id = $userId");
     }
+
+    public function findAllUserGameWithRelations($userId)
+    {
+        return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
+            FROM games, playlists, users
+            WHERE games.playlist_id = playlists.id 
+            AND games.user_id = $userId")
+            ->fetchAll();
+    }
 }

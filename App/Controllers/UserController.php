@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 use PDOException;
 
@@ -15,7 +16,13 @@ class UserController
 
     public function index()
     {
-        $users = $this->userRepository->findAll();
+        $user = User::getCurrentUser();
+        if ($user->isAdmin()) {
+            $users = $this->userRepository->findAll();
+        } else {
+            $users = [$user];
+        }
+
         require_once __DIR__ . '/../Views/User/index.php';
     }
 
@@ -90,5 +97,11 @@ class UserController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->updateForm($id);
         }
+    }
+
+    public function show()
+    {
+        $user = User::getCurrentUser();
+        require_once __DIR__ . '/../Views/User/show.php';
     }
 }

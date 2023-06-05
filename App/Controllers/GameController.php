@@ -23,7 +23,11 @@ class GameController
 
     public function index()
     {
-        $games = $this->gameRepository->findAllWithRelations();
+        if($_SESSION['user']->isAdmin()){
+            $games = $this->gameRepository->findAllWithRelations();
+        } else {
+            $games = $this->gameRepository->findAllUserGameWithRelations($_SESSION['user']->id());
+        }
         require_once __DIR__ . '/../Views/Game/index.php';
     }
 
