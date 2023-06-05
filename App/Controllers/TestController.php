@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 
 class TestController
@@ -51,5 +52,10 @@ class TestController
     public function auth()
     {
         echo 'methode auth';
+    }
+
+    public function testGetUser()
+    {
+        var_dump(User::getCurrentUser());
     }
 }

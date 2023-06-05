@@ -59,4 +59,9 @@ class User
             throw new \Exception('Invalid password');
         }
     }
+
+    public static function getCurrentUser(): ?User
+    {
+        return $_SESSION['user'] ?? null;
+    }
 }

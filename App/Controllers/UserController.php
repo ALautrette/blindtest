@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 use PDOException;
 
@@ -15,7 +16,13 @@ class UserController
 
     public function index()
     {
-        $users = $this->userRepository->findAll();
+        $user = User::getCurrentUser();
+        if ($user->isAdmin()) {
+            $users = $this->userRepository->findAll();
+        } else {
+            $users = [$user];
+        }
+
         require_once __DIR__ . '/../Views/User/index.php';
     }
 
@@ -81,15 +88,9 @@ class UserController
         }
     }
 
-    public function show($id)
+    public function show()
     {
-        try {
-            $user = $this->userRepository->find($id);
-            require_once __DIR__ . '/../Views/User/show.php';
-        } catch (PDOException $e) {
-            $error = 'L\'utilisateur n\'a pas été trouvé';
-            require_once __DIR__ . '/../Views/Components/alert-error.php';
-            $this->index();
-        }
+        $user = User::getCurrentUser();
+        require_once __DIR__ . '/../Views/User/show.php';
     }
 }
