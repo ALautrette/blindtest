@@ -65,7 +65,7 @@ $router->get('/playlists/:id/tag/delete/:idTag', "Playlist#deleteTag")->middlewa
 
 
 $router->get('/games', "Game#index")->middleware(new AuthMiddleware());
-$router->get('/games/create', "Game#createForm")->middleware(new AuthMiddleware());
+$router->get('/games/create', "Game#createForm")->middleware(new AdminMiddleware());
 $router->post('/games/create', "Game#create")->middleware(new AuthMiddleware());
 $router->get('/games/:id/update', "Game#updateForm")->middleware(new AuthMiddleware());
 $router->post('/games/:id/update', "Game#update")->middleware(new AuthMiddleware());
