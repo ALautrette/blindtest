@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Game;
-use App\Models\User;
 
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>

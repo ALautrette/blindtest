@@ -10,7 +10,7 @@ require_once __DIR__ . '/../Layouts/BackOfficeMenu.php';
     <div class="form-group">
         <label for="playlist_id">Playlist liée</label>
         <select name="playlist_id">
-            <?php foreach ($playlists as $playlist){ ?>
+            <?php foreach ($playlists as $playlist) { ?>
                 <option value="<?= $playlist->id() ?>"><?= $playlist->name() ?></option>
             <?php } ?>
         </select>

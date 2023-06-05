@@ -23,7 +23,7 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
                         $title = $music->title();
                         echo "<option value='$id'>$title</option>";
                     }
-                    ?>
+?>
                 </select>
             </div>
             <button id="addM" type="button" class="btn btn-secondary">Ajouter une musique</button>
@@ -34,13 +34,13 @@ require_once 'App/Views/Layouts/BackOfficeMenu.php';
                 <select class="form-control" id="selectT" name="tags[0]">
                     <?php
 
-                    /** @var \App\Models\Tag[] $tags */
-                    foreach ($tags as $tag) {
-                        $id = $tag->id();
-                        $title = $tag->name();
-                        echo "<option value='$id'>$title</option>";
-                    }
-                    ?>
+/** @var \App\Models\Tag[] $tags */
+foreach ($tags as $tag) {
+    $id = $tag->id();
+    $title = $tag->name();
+    echo "<option value='$id'>$title</option>";
+}
+?>
                 </select>
             </div>
             <button id="addT" type="button" class="btn btn-info">Ajouter un tag</button>

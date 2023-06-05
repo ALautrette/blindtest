@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Music;
-use App\Models\User;
 
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
