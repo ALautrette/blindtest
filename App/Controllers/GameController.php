@@ -6,6 +6,10 @@ use App\Repositories\GameRepository;
 use App\Repositories\PlaylistRepository;
 use App\Repositories\UserRepository;
 use PDOException;
+use DateTime;
+use DateTimeZone;
+
+
 
 class GameController
 {
@@ -37,18 +41,38 @@ class GameController
     public function create()
     {
         try {
-            $game = $this->gameRepository->create([
+            $this->gameRepository->create([
                 "date" => $_POST["date"],
+                "playlist_id" => $_POST["playlist_id"],
+                "user_id" => $_POST["user_id"],
+            ]);
+            $success = "Partie créée avec succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->index();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->createForm();
+        }
+    }
+
+    public function newUserGame() : void
+    {
+        try {
+            $game = $this->gameRepository->create([
+                "date" => (new DateTime('now', new DateTimeZone("UTC")))->format('Y-m-d H:i:s'),
                 "playlist_id" => $_POST["playlist_id"],
                 "user_id" => $_POST["owner_id"],
             ]);
 
-            $this->gameRepository->addUsers($game->id(), $_POST["user_ids"]);
+
+
+            $this->gameRepository->addUsers($game->id(), explode(",",$_POST["user_ids"]));
+            echo $game->id();
         } catch (PDOException $e) {
             $error = $e->getMessage();
-            return json_encode($error);
+            echo json_encode($error);
         }
-        return json_encode("Game created");
     }
 
     public function delete($id): void
@@ -89,16 +113,5 @@ class GameController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->updateForm($id);
         }
-    }
-
-    public function updateUserScore(): false|string
-    {
-        try {
-            $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return json_encode($error);
-        }
-        return json_encode("Score updated");
     }
 }

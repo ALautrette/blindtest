@@ -9,6 +9,7 @@ class Game
         private string $date,
         private int $playlistId,
         private int $userId,
+        private int $step,
     ) {
     }
 
@@ -30,5 +31,10 @@ class Game
     public function userId(): int
     {
         return $this->userId;
+    }
+
+    public function step(): int
+    {
+        return $this->step;
     }
 }

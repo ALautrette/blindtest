@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `games` (
   `date` datetime NOT NULL,
   `playlist_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
+  `step` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `games.playlist_id` (`playlist_id`),
   KEY `games.user_id` (`user_id`),
