@@ -7,7 +7,6 @@ use Route\Router;
 require_once './App/Models/User.php';
 session_start();
 require_once('Config/config.php');
-require_once './App/Views/Layouts/head.php';
 
 spl_autoload_register(function ($class_name) {
     $class_name = str_replace("\\", "/", $class_name);
@@ -74,6 +73,11 @@ $router->post("/newpassword", "Auth#newPwd");
 
 $router->get('/dashboard', "Dashboard#index");
 
-$router->run();
+$router->get('/play', "Play#index");
 
-require_once './App/Views/Layouts/footer.php';
+$router->post('api/play/update', "Game#updateUserScore");
+$router->post('api/play/create', "Game#newUserGame");
+$router->post('api/play/checkUser', "User#findByUsername");
+
+
+$router->run();

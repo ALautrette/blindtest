@@ -64,6 +64,17 @@ class UserController
         require_once __DIR__ . '/../Views/User/update.php';
     }
 
+    public function findByUsername()
+    {
+        try {
+            $user = $this->userRepository->findByUsername($_POST["username"]);
+            echo json_encode(["userId"=>$user->id(), "username"=>$user->username()]);
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            echo json_encode($error);
+        }
+    }
+
     public function update($id)
     {
         try {

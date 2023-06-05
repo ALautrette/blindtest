@@ -114,4 +114,24 @@ class PlaylistRepository extends Connector implements RepositoryInterface
         }
         return $tags;
     }
+
+    /**
+     * @param int $userId
+     * @return Playlist[]
+     */
+    public function findPlayablePlaylist(int $userId): array
+    {
+        $query = $this->pdo->prepare(
+            "select playlists.id, playlists.name, playlists.user_id, playlists.is_public
+            from playlists
+            where playlists.is_public = 1 or playlists.user_id = ?"
+        );
+        $query->execute([$userId]);
+        $playlistData = $query->fetchAll(PDO::FETCH_ASSOC);
+        $playlists = [];
+        foreach ($playlistData as $playlist) {
+            $playlists[] = new Playlist($playlist["id"], $playlist["name"], $playlist["user_id"], $playlist["is_public"]);
+        }
+        return $playlists;
+    }
 }
