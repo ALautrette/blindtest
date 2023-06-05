@@ -114,4 +114,14 @@ class PlaylistRepository extends Connector implements RepositoryInterface
         }
         return $tags;
     }
+
+    public function removeMusic($musicId, $playlistId): void
+    {
+        $query = $this->pdo->prepare("delete from music_playlist where music_id = ? and playlist_id = ?")->execute([$musicId, $playlistId]);
+    }
+
+    public function removeTag($tagId, $playlistId): void
+    {
+        $query = $this->pdo->prepare("delete from playlist_tag where tag_id = ? and playlist_id = ?")->execute([$tagId, $playlistId]);
+    }
 }

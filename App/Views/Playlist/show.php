@@ -27,54 +27,134 @@ include 'App/Views/Layouts/head.php';
     </tr>
     </tbody>
 </table>
+<form method="POST" action="/playlists/<?= $playlist->id()?>/update">
+    <div class="row">
+        <div class="col">
 
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Titre</th>
-        <th scope="col">Artiste</th>
-        <th scope="col">Url</th>
-        <th scope="col">Timecode</th>
-    </tr>
-    </thead>
-    <tbody>
+            <div id="containerM" style="width: 75%">
+                <label for="selectM">Musiques</label>
 
-    <?php /** @var Music[] $musics */
-    foreach ($musics as $music) { ?>
-        <tr>
-            <th scope="row"><?= $music->id() ?></th>
-            <td><?= $music->title() ?></td>
-            <td><?= $music->artist() ?></td>
-            <td><a href="<?= $music->url() ?>"><?= $music->url() ?></a></td>
-            <td><?= $music->timecode() ?></td>
-        </tr>
-    <?php } ?>
 
-    </tbody>
-</table>
+                <?php
+                /** @var \App\Models\Music[] $musicsPlaylist */
+                foreach ($musicsPlaylist
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Libellé</th>
-    </tr>
-    </thead>
-    <tbody>
+                         as $musicPlaylist) {
+                    ?>
+                    <div class="row">
+                        <div class="col">
+                            <p class='form-control'> <?= $musicPlaylist->title() ?></p>
+                        </div>
+                        <div class="col">
+                            <a href="/playlists/<?= $playlist->id() ?>/music/delete/<?= $musicPlaylist->id() ?>"
+                               class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="row">
+                    <select class="form-control" id="selectM" name="musics[0]" style="display: none">
+                        <?php
+                        /** @var \App\Models\Music[] $musics */
+                        foreach ($musics as $music) {
+                            $id = $music->id();
+                            $title = $music->title();
 
-    <?php
-    /** @var \App\Models\Tag[] $tags */
-    foreach ($tags as $tag) { ?>
-        <tr>
-            <th scope="row"><?= $tag->id() ?></th>
-            <td><?= $tag->name() ?></td>
-        </tr>
-    <?php } ?>
+                            echo "<option value='$id'>$title</option>";
+                        }
+?>
+                    </select>
 
-    </tbody>
-</table>
+
+                </div>
+            </div>
+
+            <button id="addM" type="button" class="btn btn-secondary">+</button>
+        </div>
+        <div class="col">
+
+            <div id="containerT" style="width: 50%">
+
+                <label for="selectT">Tags</label>
+                <?php
+
+                /** @var \App\Models\Tag[] $tagsPlaylist */
+                foreach ($tagsPlaylist as $tagPlaylist) {
+                    ?>
+                    <div class="row">
+                        <div class="col">
+                            <p class='form-control'> <?= $tagPlaylist->name() ?></p>
+                        </div>
+                        <div class="col">
+                            <a href="/playlists/<?= $playlist->id() ?>/tag/delete/<?= $tagPlaylist->id() ?>"
+                               class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                <?php } ?>
+                <select class="form-control" id="selectT" name="tags[0]" style="display: none">
+                    <?php
+                    /** @var \App\Models\Tag[] $tags */
+                    foreach ($tags as $tag) {
+                        $id = $tag->id();
+                        $title = $tag->name();
+                        echo "<option value='$id'>$title</option>";
+                    }
+?>
+                </select>
+            </div>
+
+            <button id="addT" type="button" class="btn btn-info">+</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script>
+
+    const addM = document.getElementById('addM');
+    addM.addEventListener("click", addMusic);
+    let compteurM = 0;
+
+    const addT = document.getElementById('addT');
+    addT.addEventListener("click", addTag);
+    let compteurT = 0;
+
+    function addMusic() {
+        console.log(compteurM)
+        let select = document.getElementById("selectM");
+        if (compteurM == 0) {
+            select.style.display = "block";
+        } else {
+            let clone = select.cloneNode(true);
+            clone.setAttribute('name', 'musics[' + compteurM + ']');
+            let container = document.getElementById('containerM');
+            container.appendChild(clone);
+        }
+
+        compteurM++;
+
+        if (compteurM >= 20) {
+            addM.remove();
+        }
+    }
+
+    function addTag() {
+        let select = document.getElementById("selectT");
+        if (compteurT == 0) {
+            select.style.display = "block";
+        } else {
+            let clone = select.cloneNode(true);
+            clone.setAttribute('name', 'tags[' + compteurT + ']');
+            let container = document.getElementById('containerT');
+            container.appendChild(clone);
+        }
+        compteurT++;
+        if (compteurT > 3) {
+            addT.remove();
+        }
+    }
+</script>
+
 <?php
 include 'App/Views/Layouts/footer.php';
 ?>
+
