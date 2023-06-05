@@ -6,6 +6,10 @@ use App\Repositories\GameRepository;
 use App\Repositories\PlaylistRepository;
 use App\Repositories\UserRepository;
 use PDOException;
+use DateTime;
+use DateTimeZone;
+
+
 
 class GameController
 {
@@ -48,20 +52,22 @@ class GameController
         }
     }
 
-    public function newUserGame()
+    public function newUserGame() : void
     {
         try {
             $game = $this->gameRepository->create([
-                "date" => new DateTime('now', new DateTimeZone("UTC")),
+                "date" => (new DateTime('now', new DateTimeZone("UTC")))->format('Y-m-d H:i:s'),
                 "playlist_id" => $_POST["playlist_id"],
                 "user_id" => $_POST["owner_id"],
             ]);
 
-            $this->gameRepository->addUsers($game->id(), $_POST["user_ids"]);
-            return json_encode($game->id());
+
+
+            $this->gameRepository->addUsers($game->id(), explode(",",$_POST["user_ids"]));
+            echo $game->id();
         } catch (PDOException $e) {
             $error = $e->getMessage();
-            return json_encode($error);
+            echo json_encode($error);
         }
     }
 

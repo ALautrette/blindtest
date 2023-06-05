@@ -63,12 +63,12 @@ class GameRepository extends Connector implements RepositoryInterface
     public function addUsers(int $id, array $userIds): void
     {
         foreach ($userIds as $userId) {
-            $this->pdo->query("INSERT INTO games_users (game_id, user_id) VALUES ($id, $userId)");
+            $this->pdo->query("INSERT INTO game_user (game_id, user_id) VALUES ($id, $userId)");
         }
     }
 
     public function updateUserScore($gameId, $userId): void
     {
-        $this->pdo->query("UPDATE games_users SET score = score + 1 WHERE game_id = $gameId AND user_id = $userId");
+        $this->pdo->query("UPDATE game_user SET score = score + 1 WHERE game_id = $gameId AND user_id = $userId");
     }
 }

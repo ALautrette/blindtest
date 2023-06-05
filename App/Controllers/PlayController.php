@@ -24,14 +24,15 @@ class PlayController
         require_once __DIR__ . '/../Views/Play/index.php';
     }
 
-    public function show()
+    public function show($id)
     {
-        $game = $this->gameRepository->find($_POST["game_id"]);
+        $game = $this->gameRepository->find($id);
         $step = $game->step();
         $musics = $this->playlistRepository->findMusics($game->playlistId());
         if (isset($musics[$step])) {
             $music = $musics[$step];
-            return $music;
+            require_once __DIR__ . '/../Views/Play/game.php';
+
         }
 
         return 'fin de partie';
