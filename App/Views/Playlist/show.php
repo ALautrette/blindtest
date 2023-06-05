@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Playlist;
-use App\Models\Music;
 
 include 'App/Views/Layouts/BackOfficeMenu.php';
 
