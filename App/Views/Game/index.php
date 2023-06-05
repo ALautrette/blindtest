@@ -6,7 +6,8 @@ use App\Models\User;
 require_once 'App/Views/Layouts/BackOfficeMenu.php';
 include 'App/Views/Layouts/head.php';
 ?>
-<a href="/games/create" class="btn btn-primary">Créer une partie</a>
+<?= $_SESSION['user']->isAdmin() ? '<a href="/games/create" class="btn btn-primary">Créer une partie</a>' : '' ?>
+<?php if (count($games) > 0) { ?>
 <table class="table">
     <thead>
     <tr>
@@ -36,6 +37,11 @@ include 'App/Views/Layouts/head.php';
 
     </tbody>
 </table>
+<?php } else { ?>
+    <div>
+        <p>Vous n'avez pas encore hébergé de parties</p>
+    </div>
+<?php } ?>
 <?php
 include 'App/Views/Layouts/footer.php';
 ?>

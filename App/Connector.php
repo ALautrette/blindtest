@@ -97,4 +97,12 @@ class Connector
             throw new PDOException('Failed to create data');
         }
     }
+
+    protected function abstractWhere(string $table, array $dataByColumn): array
+    {
+        $column = array_key_first($dataByColumn);
+        $value = array_values($dataByColumn)[0];
+
+        return $this->pdo->query("SELECT * FROM $table WHERE $column = $value")->fetchAll();
+    }
 }
