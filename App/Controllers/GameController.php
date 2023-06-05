@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Repositories\GameRepository;
 use App\Repositories\PlaylistRepository;
 use App\Repositories\UserRepository;
-use Cassandra\Date;
 use PDOException;
 
 class GameController
@@ -47,7 +46,6 @@ class GameController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->createForm();
         }
-
     }
 
     public function newUserGame()
@@ -61,7 +59,6 @@ class GameController
 
             $this->gameRepository->addUsers($game->id(), $_POST["user_ids"]);
             return json_encode($game->id());
-
         } catch (PDOException $e) {
             $error = $e->getMessage();
             return json_encode($error);
@@ -106,16 +103,5 @@ class GameController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->updateForm($id);
         }
-    }
-
-    public function updateUserScore(): false|string
-    {
-        try {
-            $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return json_encode($error);
-        }
-        return json_encode("Score updated");
     }
 }

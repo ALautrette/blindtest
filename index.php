@@ -74,8 +74,9 @@ $router->post("/newpassword", "Auth#newPwd");
 $router->get('/dashboard', "Dashboard#index");
 
 $router->get('/play', "Play#index");
+$router->get('/play/:id', "Play#show");
 
-$router->post('api/play/update', "Game#updateUserScore");
+$router->post('api/play/nextMusic', "Play#getNextMusic");
 $router->post('api/play/create', "Game#newUserGame");
 $router->post('api/play/checkUser', "User#findByUsername");
 

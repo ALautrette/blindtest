@@ -12,13 +12,13 @@ class GameRepository extends Connector implements RepositoryInterface
     public function create($dataByColumns): Game
     {
         $gameData = $this->abstractCreate($this->tableName, $dataByColumns);
-        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id']);
+        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id'], $gameData['step']);
     }
 
     public function find(int $id, ?array $columns = null): Game
     {
         $gameData = $this->abstractFind($this->tableName, $id, $columns);
-        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id']);
+        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id'], $gameData['step']);
     }
 
     /**
@@ -30,7 +30,7 @@ class GameRepository extends Connector implements RepositoryInterface
 
         $games = [];
         foreach ($gamesData as $gameData) {
-            $games[] = new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id']);
+            $games[] = new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id'], $gameData['step']);
         }
 
         return $games;
@@ -43,7 +43,7 @@ class GameRepository extends Connector implements RepositoryInterface
     public function update(int $id, array $dataByColumns): Game
     {
         $gameData = $this->abstractUpdate($this->tableName, $id, $dataByColumns);
-        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id']);
+        return new Game($gameData['id'], $gameData['date'], $gameData['playlist_id'], $gameData['user_id'], $gameData['step']);
     }
 
     public function delete(int $id)

@@ -5,14 +5,15 @@ namespace App\Controllers;
 use App\Repositories\GameRepository;
 use App\Repositories\PlaylistRepository;
 use App\Repositories\UserRepository;
-use PDOException;
 
 class PlayController
 {
     public function __construct(
         private PlaylistRepository $playlistRepository = new PlaylistRepository(),
-        private UserRepository $userRepository = new UserRepository(),
-    ) {
+        private UserRepository     $userRepository = new UserRepository(),
+        private GameRepository     $gameRepository = new GameRepository(),
+    )
+    {
     }
 
 
@@ -23,5 +24,27 @@ class PlayController
         require_once __DIR__ . '/../Views/Play/index.php';
     }
 
+    public function show()
+    {
+        $game = $this->gameRepository->find($_POST["game_id"]);
+        $step = $game->step();
+        $musics = $this->playlistRepository->findMusics($game->playlistId());
+        if (isset($musics[$step])) {
+            $music = $musics[$step];
+            return $music;
+        }
 
+        return 'fin de partie';
+    }
+
+    public function getNextMusic()
+    {
+        $game = $this->gameRepository->find($_POST["game_id"]);
+        $step = $game->step();
+
+        $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
+
+        $step++;
+        $this->gameRepository->update($_POST["game_id"], ["step" => $step]);
+    }
 }
