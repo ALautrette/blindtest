@@ -40,13 +40,11 @@ class GameController
             ]);
 
             $this->gameRepository->addUsers($game->id(), $_POST["user_ids"]);
-
         } catch (PDOException $e) {
             $error = $e->getMessage();
             return json_encode($error);
         }
         return json_encode("Game created");
-
     }
 
     public function delete($id): void

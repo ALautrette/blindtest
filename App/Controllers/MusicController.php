@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use App\Repositories\MusicRepository;
-use App\Repositories\TagRepository;
-use App\Repositories\PlaylistRepository;
 
 class MusicController
 {
@@ -56,7 +54,6 @@ class MusicController
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->index();
         }
-
     }
 
     public function updateForm($id)
