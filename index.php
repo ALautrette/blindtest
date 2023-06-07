@@ -2,6 +2,7 @@
 
 use Route\Middlewares\AdminMiddleware;
 use Route\Middlewares\AuthMiddleware;
+use Route\Middlewares\NotAuthMiddleware;
 use Route\Router;
 
 require_once './App/Models/User.php';
@@ -14,9 +15,7 @@ spl_autoload_register(function ($class_name) {
 });
 
 $router = new Router($_GET['url']);
-$router->get('/', function () {
-    echo "Bienvenue sur ma homepage !";
-});
+$router->get('/', "Dashboard#index");
 $router->get('/posts/:id', function ($id) {
     echo "Voila l'article $id";
 });
@@ -40,27 +39,27 @@ $router->get('/users/add/:userId', "User#addFriend")->middleware(new AuthMiddlew
 
 
 
-$router->get('/register', "Auth#create");
-$router->post('/register', "Auth#store");
+$router->get('/register', "Auth#create")->middleware(new NotAuthMiddleware());
+$router->post('/register', "Auth#store")->middleware(new NotAuthMiddleware());
 
 $router->get('/musics', "Music#index")->middleware(new AuthMiddleware());
 $router->get('/musics/create', "Music#createForm")->middleware(new AuthMiddleware());
 $router->post('/musics/create', "Music#create")->middleware(new AuthMiddleware());
 $router->get('/musics/:id/update', "Music#updateForm")->middleware(new AuthMiddleware());
 $router->post('/musics/:id/update', "Music#update")->middleware(new AuthMiddleware());
-$router->get('/musics/:id/delete', "Music#delete")->middleware(new AuthMiddleware());
+$router->get('/musics/:id/delete', "Music#delete")->middleware(new AdminMiddleware());
 
-$router->get('/tags', "Tag#index");
-$router->get('/tags/create', "Tag#createForm");
-$router->post('/tags/create', "Tag#create");
-$router->get('/tags/:id/update', "Tag#updateForm");
-$router->post('/tags/:id/update', "Tag#update");
-$router->get('/tags/:id/delete', "Tag#delete");
+$router->get('/tags', "Tag#index")->middleware(new AuthMiddleware());
+$router->get('/tags/create', "Tag#createForm")->middleware(new AuthMiddleware());
+$router->post('/tags/create', "Tag#create")->middleware(new AuthMiddleware());
+$router->get('/tags/:id/update', "Tag#updateForm")->middleware(new AuthMiddleware());
+$router->post('/tags/:id/update', "Tag#update")->middleware(new AuthMiddleware());
+$router->get('/tags/:id/delete', "Tag#delete")->middleware(new AdminMiddleware());
 
 $router->get('/playlists', "Playlist#index")->middleware(new AuthMiddleware());
 $router->get('/playlists/create', "Playlist#createForm")->middleware(new AuthMiddleware());
 $router->post('/playlists/create', "Playlist#create")->middleware(new AuthMiddleware());
-$router->get('/playlists/delete/:id', "Playlist#delete")->middleware(new AuthMiddleware());
+$router->get('/playlists/delete/:id', "Playlist#delete")->middleware(new AdminMiddleware());
 $router->get('/playlists/:id', "Playlist#show")->middleware(new AuthMiddleware());
 ;
 $router->post('/playlists/:id/update', "Playlist#update")->middleware(new AuthMiddleware());
@@ -78,21 +77,21 @@ $router->get('/games/:id/update', "Game#updateForm")->middleware(new AuthMiddlew
 $router->post('/games/:id/update', "Game#update")->middleware(new AuthMiddleware());
 $router->get('/games/:id/delete', "Game#delete")->middleware(new AuthMiddleware());
 
-$router->get('/login', "Auth#loginPage");
-$router->post('/login', "Auth#login");
+$router->get('/login', "Auth#loginPage")->middleware(new NotAuthMiddleware());
+$router->post('/login', "Auth#login")->middleware(new NotAuthMiddleware());
 
-$router->get('/logout', "Auth#logout");
+$router->get('/logout', "Auth#logout")->middleware(new AuthMiddleware());
 
-$router->get("/reset", "Auth#resetPage");
-$router->post("/reset", "Auth#reset");
+$router->get("/reset", "Auth#resetPage")->middleware(new AuthMiddleware()); //Voir perms Gab
+$router->post("/reset", "Auth#reset")->middleware(new AuthMiddleware()); //Voir perms Gab
 
-$router->get("/newpassword", "Auth#newPwdPage");
-$router->post("/newpassword", "Auth#newPwd");
+$router->get("/newpassword", "Auth#newPwdPage")->middleware(new AuthMiddleware());
+$router->post("/newpassword", "Auth#newPwd")->middleware(new AuthMiddleware());
 
 $router->get('/dashboard', "Dashboard#index");
 
-$router->get('/play', "Play#index");
-$router->get('/play/:id', "Play#show");
+$router->get('/play', "Play#index")->middleware(new AuthMiddleware());
+$router->get('/play/:id', "Play#show")->middleware(new AuthMiddleware());
 
 $router->post('api/play/nextMusic', "Play#getNextMusic");
 $router->post('api/play/create', "Game#newUserGame");
