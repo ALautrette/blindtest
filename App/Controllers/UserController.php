@@ -102,6 +102,34 @@ class UserController
     public function show()
     {
         $user = User::getCurrentUser();
+        $friends = $this->userRepository->getFriends($user->id());
         require_once __DIR__ . '/../Views/User/show.php';
+    }
+
+    public function addFriend($userId): void
+    {
+        $user = User::getCurrentUser();
+        $res = $this->userRepository->addFriend($user->id(), $userId);
+        if ($res) {
+            $success = "L'utilisateur a été ajouté avc succès";
+            require_once __DIR__ . '/../Views/Components/alert-success.php';
+            $this->show();
+        } else {
+            $error = "Une erreur est survenue";
+            require_once __DIR__ . '/../Views/Components/alert-error.php';
+            $this->showSearchForm();
+        }
+    }
+
+    public function showSearchForm(): void
+    {
+        require_once __DIR__ . '/../Views/User/searchForm.php';
+    }
+
+    public function showResults(): void
+    {
+        $user = User::getCurrentUser();
+        $users = $this->userRepository->getUsersUsername($_POST['username']);
+        require_once __DIR__ . '/../Views/User/searchResults.php';
     }
 }

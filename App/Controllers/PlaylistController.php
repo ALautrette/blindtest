@@ -21,7 +21,7 @@ class PlaylistController
 
     public function index(): void
     {
-        if($_SESSION['user']->isAdmin()){
+        if ($_SESSION['user']->isAdmin()) {
             $playlists = $this->playlistRepository->findAll();
         } else {
             $playlists = $this->playlistRepository->findUserPlaylists($_SESSION['user']->id());

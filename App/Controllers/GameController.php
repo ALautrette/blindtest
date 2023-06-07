@@ -9,8 +9,6 @@ use PDOException;
 use DateTime;
 use DateTimeZone;
 
-
-
 class GameController
 {
     public function __construct(
@@ -23,7 +21,7 @@ class GameController
 
     public function index()
     {
-        if($_SESSION['user']->isAdmin()){
+        if ($_SESSION['user']->isAdmin()) {
             $games = $this->gameRepository->findAllWithRelations();
         } else {
             $games = $this->gameRepository->findAllUserGameWithRelations($_SESSION['user']->id());
@@ -56,7 +54,7 @@ class GameController
         }
     }
 
-    public function newUserGame() : void
+    public function newUserGame(): void
     {
         try {
             $game = $this->gameRepository->create([
@@ -67,7 +65,7 @@ class GameController
 
 
 
-            $this->gameRepository->addUsers($game->id(), explode(",",$_POST["user_ids"]));
+            $this->gameRepository->addUsers($game->id(), explode(",", $_POST["user_ids"]));
             echo $game->id();
         } catch (PDOException $e) {
             $error = $e->getMessage();

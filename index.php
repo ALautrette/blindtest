@@ -31,9 +31,14 @@ $router->get('/users', "User#index")->middleware(new AdminMiddleware());
 $router->get('/users/create', "User#createForm")->middleware(new AdminMiddleware());
 $router->post('/users/create', "User#create")->middleware(new AdminMiddleware());
 $router->get('/profile', "User#show")->middleware(new AuthMiddleware());
+$router->get('/users/search', "User#showSearchForm")->middleware(new AuthMiddleware());
+$router->post('/users/search', "User#showResults")->middleware(new AuthMiddleware());
 $router->get('/users/:id/update', "User#updateForm")->middleware(new AdminMiddleware());
 $router->post('/users/:id/update', "User#update")->middleware(new AdminMiddleware());
 $router->get('/users/:id/delete', "User#delete")->middleware(new AdminMiddleware());
+$router->get('/users/add/:userId', "User#addFriend")->middleware(new AuthMiddleware());
+
+
 
 $router->get('/register', "Auth#create");
 $router->post('/register', "Auth#store");
@@ -56,10 +61,14 @@ $router->get('/playlists', "Playlist#index")->middleware(new AuthMiddleware());
 $router->get('/playlists/create', "Playlist#createForm")->middleware(new AuthMiddleware());
 $router->post('/playlists/create', "Playlist#create")->middleware(new AuthMiddleware());
 $router->get('/playlists/delete/:id', "Playlist#delete")->middleware(new AuthMiddleware());
-$router->get('/playlists/:id', "Playlist#show")->middleware(new AuthMiddleware());;
-$router->post('/playlists/:id/update', "Playlist#update")->middleware(new AuthMiddleware());;
-$router->get('/playlists/:id/music/delete/:idMusic', "Playlist#deleteMusic")->middleware(new AuthMiddleware());;
-$router->get('/playlists/:id/tag/delete/:idTag', "Playlist#deleteTag")->middleware(new AuthMiddleware());;
+$router->get('/playlists/:id', "Playlist#show")->middleware(new AuthMiddleware());
+;
+$router->post('/playlists/:id/update', "Playlist#update")->middleware(new AuthMiddleware());
+;
+$router->get('/playlists/:id/music/delete/:idMusic', "Playlist#deleteMusic")->middleware(new AuthMiddleware());
+;
+$router->get('/playlists/:id/tag/delete/:idTag', "Playlist#deleteTag")->middleware(new AuthMiddleware());
+;
 
 
 $router->get('/games', "Game#index")->middleware(new AuthMiddleware());

@@ -31,7 +31,7 @@
         <?= $_SESSION['user']->isAdmin() ?
             '<li><a href="/users">Users</a></li>' :
             '<li><a href="/profile">Profile</a></li>'
-        ?>
+?>
         <li><a href="/musics">Musics</a></li>
         <li><a href="/playlists">Playlists</a></li>
         <li><a href="/games">Games</a></li>
