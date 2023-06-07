@@ -31,9 +31,9 @@
 </style>
 <nav>
     <ul><?php if (\App\Models\User::isLoggedIn()) { ?>
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/dashboard">Home</a></li>
 
-            <?php
+            <?=
             $_SESSION['user']->isAdmin() ?
                 '<li><a href="/users">Users</a></li>' :
                 '<li><a href="/profile">Profile</a></li>';
