@@ -46,7 +46,7 @@ class Router
                 return $route->call();
             }
         }
-        throw new \Exception('No matching routes');
+        require_once "App/Views/404.php";
     }
 
     public function url($name, $params = [])

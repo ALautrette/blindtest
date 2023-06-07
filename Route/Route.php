@@ -48,6 +48,7 @@ class Route
         if ($this->middleware && !$this->middleware->test()) {
             return $this->middleware->deniedView();
         }
+
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             $controller = "App\\Controllers\\" . $params[0] . "Controller";
