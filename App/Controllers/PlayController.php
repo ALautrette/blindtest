@@ -12,8 +12,7 @@ class PlayController
         private PlaylistRepository $playlistRepository = new PlaylistRepository(),
         private UserRepository     $userRepository = new UserRepository(),
         private GameRepository     $gameRepository = new GameRepository(),
-    )
-    {
+    ) {
     }
 
 
@@ -32,7 +31,6 @@ class PlayController
         if (isset($musics[$step])) {
             $music = $musics[$step];
             require_once __DIR__ . '/../Views/Play/game.php';
-
         }
 
         return 'fin de partie';
