@@ -90,8 +90,8 @@ class AuthController
 
             $to = $user->email();
             $subject = 'Reset your password';
-            $message = "Please click on the link below to reset your password:\r\n";
-            $message .= "http://localhost:8000/reset?token=$token\r\n";
+            $message = "Please copy/paste the link below to reset your password:\r\n";
+            $message .= $_SERVER['SERVER_NAME'] . "/newpassword?token=$token\r\n";
             $headers = "From: reset@spaghetti.agency\r\n";
             $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
