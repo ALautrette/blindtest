@@ -3,6 +3,7 @@ include __DIR__ . '/../Layouts/head.php';
 ?>
 <script type="text/javascript">
     const users = [];
+    const ownerId = <?php echo $user->id() ?>
 
     function checkUser() {
         var user = document.getElementById("user").value;
@@ -28,7 +29,7 @@ include __DIR__ . '/../Layouts/head.php';
     function addUser(user) {
         //add user to list if not already in
         const isIn = users.find(u => u.userId === user.userId)
-        if(isIn) {
+        if(isIn || user.userId === ownerId) {
             return;
         }
         users.push(user);
@@ -60,7 +61,7 @@ include __DIR__ . '/../Layouts/head.php';
 
     function startGame() {
         const playlist = document.getElementById("playlist").value;
-        const usersIds = users.map(user => user.userId);
+        const usersIds = [ownerId,...users.map(user => user.userId)];
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -76,7 +77,7 @@ include __DIR__ . '/../Layouts/head.php';
         }
         xhr.open("POST", "/api/play/create", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("user_ids=" + usersIds + "&playlist_id=" + playlist+"&owner_id="+<?= $user->id() ?>);
+        xhr.send("user_ids=" + usersIds + "&playlist_id=" + playlist+"&owner_id="+ ownerId);
     }
 
 </script>

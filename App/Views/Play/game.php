@@ -1,7 +1,7 @@
 <?php
 include 'App/Views/Layouts/head.php';
 ?>
-<section class="d-block position-relative min-vh-100">
+<section class="player-container d-block position-relative min-vh-100">
     <div class="position-absolute top-50 start-50 translate-middle">
         <button onclick="onPlayerReady()" id="startButton" class="btn btn-outline-light btn-lg w-100 "
                 type="submit">Play song
@@ -10,8 +10,44 @@ include 'App/Views/Layouts/head.php';
     <div class="position-absolute" id="player"></div>
     <span class="loader d-block position-absolute top-50 start-50 translate-middle d-none"></span>
 </section>
+<section class="choices text-center d-none">
+    <h2>Who guessed first ?</h2>
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <?php
+        foreach ($players as $player) {
+            echo '
+            <div onclick="nextMusic(' . $player->id() . ')" role="button" class="choices-wrap m-2 bg-black rounded-3 position-relative pointer-event" style="width:100px;height:100px;">
+                <div class="choice position-absolute top-50 start-50 translate-middle">' . $player->username() . '</div>
+            </div>
+            ';
+        }
+        echo '<div onclick="nextMusic(-1)" role="button" class="choices-wrap m-2 bg-black rounded-3 position-relative pointer-event" style="width:100px;height:100px;">
+                <div class="choice position-absolute top-50 start-50 translate-middle"> No winner </div>
+            </div>'
+
+
+        ?>
+    </div>
+</section>
 <script>
-    // 2. This code loads the IFrame Player API code asynchronously.
+
+    function nextMusic($winnerId) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                console.log(xhr.responseText);
+                location.reload();
+
+            }
+        }
+        xhr.open("POST", "/api/play/nextMusic", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("game_id=" + <?php echo $game->id() ?> +"&user_id=" + $winnerId);
+    }
+
+    /** Youtube API **/
+    /** https://developers.google.com/youtube/iframe_api_reference **/
+        // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement("script");
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -64,7 +100,8 @@ include 'App/Views/Layouts/head.php';
 
     function stopVideo() {
         player.stopVideo();
-        document.querySelector('.loader').classList.add('d-none');
+        document.querySelector('.player-container').classList.add('d-none');
+        document.querySelector('.choices').classList.remove('d-none');
 
     }
 </script>

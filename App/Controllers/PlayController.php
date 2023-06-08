@@ -29,21 +29,26 @@ class PlayController
         $game = $this->gameRepository->find($id);
         $step = $game->step();
         $musics = $this->playlistRepository->findMusics($game->playlistId());
+        $players = $this->gameRepository->getGameUsers($id);
         if (isset($musics[$step])) {
             $music = $musics[$step];
             require_once __DIR__ . '/../Views/Play/game.php';
 
-        }
+        }else{
+            require_once __DIR__ . '/../Views/Play/results.php';
 
-        return 'fin de partie';
+        }
     }
+
 
     public function getNextMusic()
     {
         $game = $this->gameRepository->find($_POST["game_id"]);
         $step = $game->step();
 
-        $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
+        if($_POST["user_id"] > -1){
+            $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
+        }
 
         $step++;
         $this->gameRepository->update($_POST["game_id"], ["step" => $step]);
