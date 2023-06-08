@@ -85,7 +85,7 @@ class GameRepository extends Connector implements RepositoryInterface
 
     public function getGameUsers($gameId)
     {
-        $playersData = $this->pdo->query("SELECT users.id, users.username, game_user.score FROM game_user, users WHERE game_user.game_id = $gameId AND game_user.user_id = users.id")->fetchAll();
+        $playersData = $this->pdo->query("SELECT users.id, users.username, game_user.score FROM game_user, users WHERE game_user.game_id = $gameId AND game_user.user_id = users.id ORDER BY game_user.score DESC")->fetchAll();
         $players = [];
         foreach ($playersData as $playerData) {
             $players[] = new Player($playerData['id'], $playerData['username'], $playerData['score']);

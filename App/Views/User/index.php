@@ -6,8 +6,8 @@ include 'App/Views/Layouts/BackOfficeMenu.php';
 include 'App/Views/Layouts/head.php';
 
 ?>
-
-<a href="/users/create" class="btn btn-primary">Créer un utilisateur</a>
+<section style="max-width: 1000px;margin:auto">
+<a href="/users/create" class="btn btn-primary my-3">Create a user</a>
 <table class="table">
   <thead>
     <tr>
@@ -38,7 +38,7 @@ include 'App/Views/Layouts/head.php';
 
   </tbody>
 </table>
-
+</section>
 <?php
 include 'App/Views/Layouts/footer.php';
 ?>

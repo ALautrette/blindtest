@@ -32,6 +32,8 @@ class PlayController
         if (isset($musics[$step])) {
             $music = $musics[$step];
             require_once __DIR__ . '/../Views/Play/game.php';
+        }else{
+            require_once __DIR__ . '/../Views/Play/results.php';
         }
     }
 
