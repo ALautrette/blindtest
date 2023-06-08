@@ -20,6 +20,7 @@ $router->get('/posts/:id', function ($id) {
     echo "Voila l'article $id";
 });
 $router->get('/test', "Test#show");
+$router->get('/test/mail', "Test#sendMail");
 $router->get('/test/user', "Test#testGetUser");
 $router->get('/test/auth', 'Test#auth')->middleware(new AuthMiddleware());
 $router->get('/test/admin', 'Test#auth')->middleware(new AdminMiddleware());
@@ -82,11 +83,11 @@ $router->post('/login', "Auth#login")->middleware(new NotAuthMiddleware());
 
 $router->get('/logout', "Auth#logout")->middleware(new AuthMiddleware());
 
-$router->get("/reset", "Auth#resetPage")->middleware(new AuthMiddleware()); //Voir perms Gab
-$router->post("/reset", "Auth#reset")->middleware(new AuthMiddleware()); //Voir perms Gab
+$router->get("/reset", "Auth#resetPage")->middleware(new NotAuthMiddleware()); //Voir perms Gab
+$router->post("/reset", "Auth#reset")->middleware(new NotAuthMiddleware()); //Voir perms Gab
 
-$router->get("/newpassword", "Auth#newPwdPage")->middleware(new AuthMiddleware());
-$router->post("/newpassword", "Auth#newPwd")->middleware(new AuthMiddleware());
+$router->get("/newpassword", "Auth#newPwdPage")->middleware(new NotAuthMiddleware());
+$router->post("/newpassword", "Auth#newPwd")->middleware(new NotAuthMiddleware());
 
 $router->get('/dashboard', "Dashboard#index");
 

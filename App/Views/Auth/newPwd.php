@@ -4,7 +4,6 @@ include 'App/Views/Layouts/head.php';
 <div>
     <h1>Enter your new password</h1>
     <form action="/newpassword" method="post">
-        <?php echo $user->id() ?>
         <input type="text" name="userId" value="<?php echo $user->id() ?>" hidden />
         <label for="password">
             Password

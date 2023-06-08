@@ -58,4 +58,17 @@ class TestController
     {
         var_dump(User::getCurrentUser());
     }
+
+    public function sendMail()
+    {
+        echo $_SERVER['SERVER_NAME'];
+        $to = 'test@test.fr';
+        $subject = 'Reset your password';
+        $message = "Please copy/paste the link below to reset your password:\r\n";
+        $message .= $_SERVER['SERVER_NAME'] . "/newpassword?token=testtoken\r\n";
+        $headers = "From: reset@spaghetti.agency\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+        echo mail($to, $subject, $message, $headers);
+    }
 }
