@@ -20,6 +20,7 @@ $router->get('/posts/:id', function ($id) {
     echo "Voila l'article $id";
 });
 $router->get('/test', "Test#show");
+$router->get('/test/mail', "Test#sendMail");
 $router->get('/test/user', "Test#testGetUser");
 $router->get('/test/auth', 'Test#auth')->middleware(new AuthMiddleware());
 $router->get('/test/admin', 'Test#auth')->middleware(new AdminMiddleware());

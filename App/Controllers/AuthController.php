@@ -87,6 +87,16 @@ class AuthController
             $expiry = new DateTime('now', new DateTimeZone("UTC"));
             $expiry = $expiry->add(new DateInterval('PT15M'));
             $this->userRepository->update($user->id(), ['reset_token' => $token, 'token_expiry' => $expiry->format('Y-m-d H:i:s')]);
+
+            $to = $user->email();
+            $subject = 'Reset your password';
+            $message = "Please click on the link below to reset your password:\r\n";
+            $message .= "http://localhost:8000/reset?token=$token\r\n";
+            $headers = "From: reset@spaghetti.agency\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+            return mail($to, $subject, $message, $headers);
+
             header('Location: /login');
         } catch (\Exception $e) {
             $message = $e->getMessage();
