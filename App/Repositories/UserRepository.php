@@ -4,10 +4,12 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Connector;
+use PDO;
 
 class UserRepository extends Connector implements RepositoryInterface
 {
     private string $tableName = 'users';
+
     public function create($dataByColumns): User
     {
         $userData = $this->abstractCreate($this->tableName, $dataByColumns);
@@ -75,5 +77,50 @@ class UserRepository extends Connector implements RepositoryInterface
             throw new \Exception('Invalid username');
         }
         return new User($userData['id'], $userData['username'], $userData['email'], $userData['password'], $userData['reset_token'], $userData['token_expiry'], $userData['is_admin']);
+    }
+
+    public function addFriend($user1Id, $user2Id): int
+    {
+        $query = $this->pdo->prepare(
+            "insert into user_user (first_user_id, second_user_id) values (?, ?)"
+        );
+        $success = $query->execute([$user1Id, $user2Id]);
+        if (!$success) {
+            throw new PDOException('Failed to create data');
+        }
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getUsersUsername($username): array
+    {
+        $query = $this->pdo->prepare(
+            "select id, username from users where username like CONCAT('%', ?, '%')"
+        );
+        $query->execute([$username]);
+        return $query->fetchAll();
+    }
+
+    /**
+     * @param $id
+     * @return User[]
+     */
+    public function getFriends($id): array
+    {
+        $query = $this->pdo->prepare("select first_user_id, second_user_id from user_user where first_user_id = ? or second_user_id = ?");
+        $query->execute([$id, $id]);
+        $usersData = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = [];
+        foreach ($usersData as $userData) {
+            if ($userData["first_user_id"] == $id) {
+                $users[] = $this->find($userData["second_user_id"]);
+            } else {
+                $users[] = $this->find($userData["first_user_id"]);
+            }
+        }
+        return $users;
     }
 }

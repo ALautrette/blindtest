@@ -64,4 +64,8 @@ class User
     {
         return $_SESSION['user'] ?? null;
     }
+
+    public static function isLoggedIn() : bool {
+        return isset($_SESSION['user']);
+    }
 }

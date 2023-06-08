@@ -38,15 +38,16 @@ class Router
 
     public function run()
     {
-        if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
-            throw new \Exception('REQUEST_METHOD does not exist');
-        }
-        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-            if ($route->match($this->url)) {
-                return $route->call();
+        if (isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+            foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+                if ($route->match($this->url)) {
+                    return $route->call();
+                }
             }
         }
-        throw new \Exception('No matching routes');
+        require_once "App/Views/404.php";
+
+
     }
 
     public function url($name, $params = [])

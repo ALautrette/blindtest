@@ -12,8 +12,7 @@ class PlayController
         private PlaylistRepository $playlistRepository = new PlaylistRepository(),
         private UserRepository     $userRepository = new UserRepository(),
         private GameRepository     $gameRepository = new GameRepository(),
-    )
-    {
+    ) {
     }
 
 
@@ -33,10 +32,6 @@ class PlayController
         if (isset($musics[$step])) {
             $music = $musics[$step];
             require_once __DIR__ . '/../Views/Play/game.php';
-
-        }else{
-            require_once __DIR__ . '/../Views/Play/results.php';
-
         }
     }
 
@@ -46,7 +41,7 @@ class PlayController
         $game = $this->gameRepository->find($_POST["game_id"]);
         $step = $game->step();
 
-        if($_POST["user_id"] > -1){
+        if ($_POST["user_id"] > -1) {
             $this->gameRepository->updateUserScore($_POST["game_id"], $_POST["user_id"]);
         }
 

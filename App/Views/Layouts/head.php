@@ -1,4 +1,6 @@
 <?php ?>
+<!DOCTYPE html>
+<html>
 <head>
     <title>Blindtest</title>
     <link rel="stylesheet" href="/public/style/bootstrap.min.css">
