@@ -7,6 +7,9 @@ include 'App/Views/Layouts/BackOfficeMenu.php';
 include 'App/Views/Layouts/head.php';
 
 ?>
+<a href="/playlists">
+    <i class="fa-solid fa-arrow-left" style="font-size: 40px; margin: 10px 0 0 10px"></i>
+</a>
 <section class="container my-5 bg-dark" style="max-width: 1500px;margin:auto;border-radius: 1rem;">
     <div class="text-white p-3">
         <table class="table">
