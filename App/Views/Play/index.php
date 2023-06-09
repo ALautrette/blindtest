@@ -51,9 +51,9 @@ include __DIR__ . '/../Layouts/head.php';
                             <span>
                             ${user.username}
                             </span>
-                            <span>
+                            <a href="#">
                                 <i onclick="deleteUser(${user.userId})" class="fa-solid fa-trash"></i>
-                            </span>
+                            </a>
                           </li>`;
         }
         container.innerHTML = usersHTML;
