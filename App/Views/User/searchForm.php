@@ -9,7 +9,7 @@ include 'App/Views/Layouts/BackOfficeMenu.php';
                 <form method="POST" action="/users/search">
                     <label for="username">Username</label>
                     <input class="form-control" type="text" name="username">
-                    <button class="btn-info" type="submit">Search</button>
+                    <button class="btn btn-primary mt-1" type="submit">Search</button>
                 </form>
             </div>
         </div>

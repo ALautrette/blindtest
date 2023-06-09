@@ -11,7 +11,8 @@ include 'App/Views/Layouts/head.php';
     <span class="loader d-block position-absolute top-50 start-50 translate-middle d-none"></span>
 </section>
 <section class="choices text-center d-none">
-    <h2>Who guessed first ?</h2>
+    <h2>Who guessed it first ?</h2>
+    <h3>It was : <?php echo $music->artist().' - '. $music->title() ?></h3>
     <div class="d-flex justify-content-center align-items-center flex-wrap">
         <?php
         foreach ($players as $player) {
@@ -23,9 +24,7 @@ include 'App/Views/Layouts/head.php';
         }
         echo '<div onclick="nextMusic(-1)" role="button" class="choices-wrap m-2 bg-black rounded-3 position-relative pointer-event" style="width:100px;height:100px;">
                 <div class="choice position-absolute top-50 start-50 translate-middle"> No winner </div>
-            </div>'
-
-
+            </div>';
         ?>
     </div>
 </section>

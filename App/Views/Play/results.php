@@ -29,5 +29,8 @@ include __DIR__ . '/../Layouts/head.php';
             ?>
             </tbody>
         </table>
+        <button class="btn btn-primary d-block my-1" type="submit"><a href="/dashboard">Back to home</a></button>
+        <button class="btn btn-primary d-block my-1" type="submit"><a href="/play">New game</a></button>
+
     </div>
 </section>
