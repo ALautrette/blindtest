@@ -53,10 +53,16 @@ class UserController
     public function delete($id): void
     {
         try {
-            $this->userRepository->delete($id);
-            $success = "Utilisateur supprimé avec succès";
-            require_once __DIR__ . '/../Views/Components/alert-success.php';
-            $this->index();
+            if(User::getCurrentUser()->id() == $id){
+                $error = "Il n'est pas possible de se suicider";
+                require_once __DIR__ . '/../Views/Components/alert-error.php';
+                $this->index();
+            } else {
+                $this->userRepository->delete($id);
+                $success = "Utilisateur supprimé avec succès";
+                require_once __DIR__ . '/../Views/Components/alert-success.php';
+                $this->index();
+            }
         } catch (PDOException $e) {
             $error = $e->getMessage();
             require_once __DIR__ . '/../Views/Components/alert-error.php';

@@ -4,22 +4,23 @@ include "App/Views/Layouts/head.php";
 ?>
     <section class="container my-5 bg-dark" style="max-width: 1000px;margin:auto;border-radius: 1rem;">
         <div class="text-white p-3">
-            <form method="POST" action="<?= '/musics/' . $music->id() . '/update' ?>">
+            <form method="POST" action="<?= /** @var \App\Models\Music $music */
+            '/musics/' . $music->id() . '/update' ?>">
                 <div class="form-group">
                     <label for="url">Url</label>
-                    <input type="text" class="form-control" name="url" placeholder="youtube.com/exemple">
+                    <input type="text" class="form-control" name="url" value="<?=$music->url()?>">
                 </div>
                 <div class="form-group">
                     <label for="title">Titre</label>
-                    <input type="text" class="form-control" name="title" placeholder="Titre">
+                    <input type="text" class="form-control" name="title" value="<?=$music->title()?>">
                 </div>
                 <div class="form-group">
                     <label for="artist">Artiste</label>
-                    <input type="text" class="form-control" name="artist" placeholder="Artiste">
+                    <input type="text" class="form-control" name="artist" value="<?=$music->artist()?>">
                 </div>
                 <div class="form-group">
                     <label for="timecode">Timecode</label>
-                    <input type="number" class="form-control" name="timecode" placeholder="En secondes">
+                    <input type="number" class="form-control" name="timecode" value="<?=$music->timecode()?>">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
