@@ -48,7 +48,7 @@
                 <?=
                 $_SESSION['user']->isAdmin() ?
                     '<li><a href="/users">Users</a></li>' :
-                    '<li><a href="/profile">Profile</a></li>';
+                    '';
                 ?>
                 <li><a href="/musics">Musics</a></li>
                 <li><a href="/playlists">Playlists</a></li>
@@ -58,6 +58,13 @@
             <li class="sub-menu position-relative">
                 <span><?php echo \App\Models\User::getCurrentUser()->username() ?></span>
                 <ul class="sub-menu-items position-absolute top-100 end-0">
+
+                        <?=
+                        $_SESSION['user']->isAdmin() ?
+                            '' :
+                            '<li class="nav-item p-1"><a class="nav-link" href="/profile">Profile</a></li>';
+                        ?>
+
                     <li class="nav-item p-1">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
