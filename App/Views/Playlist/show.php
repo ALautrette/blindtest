@@ -54,7 +54,7 @@ include 'App/Views/Layouts/head.php';
                             </div>
                         <?php } ?>
                         <div class="row">
-                            <select class="form-control" id="selectM" name="musics[0]" style="display: none">
+                            <select class="form-control" id="selectM" name="none" style="display: none">
                                 <?php
                                 /** @var \App\Models\Music[] $musics */
                                 foreach ($musics as $music) {
@@ -92,7 +92,7 @@ include 'App/Views/Layouts/head.php';
                                 </div>
                             </div>
                         <?php } ?>
-                        <select class="form-control" id="selectT" name="tags[0]" style="display: none">
+                        <select class="form-control" id="selectT" name="none" style="display: none">
                             <?php
                             /** @var \App\Models\Tag[] $tags */
                             foreach ($tags as $tag) {
@@ -124,14 +124,13 @@ include 'App/Views/Layouts/head.php';
     function addMusic() {
         console.log(compteurM)
         let select = document.getElementById("selectM");
-        if (compteurM == 0) {
-            select.style.display = "block";
-        } else {
-            let clone = select.cloneNode(true);
-            clone.setAttribute('name', 'musics[' + compteurM + ']');
-            let container = document.getElementById('containerM');
-            container.appendChild(clone);
-        }
+
+        let clone = select.cloneNode(true);
+        clone.setAttribute('name', 'musics[' + compteurM + ']');
+        clone.style.display = "block";
+        let container = document.getElementById('containerM');
+        container.appendChild(clone);
+
 
         compteurM++;
 
@@ -142,14 +141,13 @@ include 'App/Views/Layouts/head.php';
 
     function addTag() {
         let select = document.getElementById("selectT");
-        if (compteurT == 0) {
-            select.style.display = "block";
-        } else {
-            let clone = select.cloneNode(true);
-            clone.setAttribute('name', 'tags[' + compteurT + ']');
-            let container = document.getElementById('containerT');
-            container.appendChild(clone);
-        }
+
+        let clone = select.cloneNode(true);
+        clone.setAttribute('name', 'tags[' + compteurT + ']');
+        clone.style.display = "block";
+        let container = document.getElementById('containerT');
+        container.appendChild(clone);
+
         compteurT++;
         if (compteurT > 3) {
             addT.remove();
