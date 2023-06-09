@@ -12,8 +12,7 @@ if (\App\Models\User::isLoggedIn()) {
     </section>
     <?php
 } else {
-    echo "Bienvenue sur notre super Blindtest :)";
+    header('Location: /login');
 }
-
 
 include 'App/Views/Layouts/footer.php';
