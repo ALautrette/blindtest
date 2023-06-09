@@ -95,7 +95,7 @@ class AuthController
             $headers = "From: reset@spaghetti.agency\r\n";
             $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-            return mail($to, $subject, $message, $headers);
+            mail($to, $subject, $message, $headers);
 
             header('Location: /login');
         } catch (\Exception $e) {
