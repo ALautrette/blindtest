@@ -20,6 +20,7 @@ class PlayController
     {
         $user = $_SESSION["user"];
         $playlists = $this->playlistRepository->findPlayablePlaylist($user->id());
+        $friends = $this->userRepository->getFriends($user->id());
         require_once __DIR__ . '/../Views/Play/index.php';
     }
 

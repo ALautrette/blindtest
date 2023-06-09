@@ -6,7 +6,7 @@ include __DIR__ . '/../Layouts/head.php';
     const ownerId = <?php echo $user->id() ?>
 
         function checkUser() {
-            var user = document.getElementById("user").value;
+            var user = document.getElementById("friend").value;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -33,7 +33,7 @@ include __DIR__ . '/../Layouts/head.php';
             return;
         }
         users.push(user);
-        document.getElementById("user").value = "";
+        document.getElementById("friend").value = "";
         buildUsersList();
     }
 
@@ -94,9 +94,15 @@ include __DIR__ . '/../Layouts/head.php';
                 </select>
             </div>
             <div class="m-2">
-                <label for="user">Add a user</label>
-                <input type="text" id="user" name="user" placeholder="New user">
+                <label for="friend">Add a friend</label>
+                <select name="friend" id="friend">
+                    <option value="" selected disabled>Choose a friend</option>
+                    <?php foreach ($friends as $friend) : ?>
+                        <option value="<?= $friend->username() ?>"><?= $friend->username() ?></option>
+                    <?php endforeach; ?>
+                </select>
                 <button onclick="checkUser()">Add user</button>
+
             </div>
             <div class="m-2">
                 <h2>Other users in the room</h2>
