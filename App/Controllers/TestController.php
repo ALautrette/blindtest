@@ -61,7 +61,6 @@ class TestController
 
     public function sendMail()
     {
-        echo $_SERVER['SERVER_NAME'];
         $to = 'test@test.fr';
         $subject = 'Reset your password';
         $message = "Please copy/paste the link below to reset your password:\r\n";
