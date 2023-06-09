@@ -109,17 +109,15 @@ class UserRepository extends Connector implements RepositoryInterface
      */
     public function getFriends($id): array
     {
-        $query = $this->pdo->prepare("select first_user_id, second_user_id from user_user where first_user_id = ? or second_user_id = ?");
-        $query->execute([$id, $id]);
+        $query = $this->pdo->prepare("select second_user_id from user_user where first_user_id = ?");
+        $query->execute([$id]);
         $usersData = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $users = [];
         foreach ($usersData as $userData) {
-            if ($userData["first_user_id"] == $id) {
-                $users[] = $this->find($userData["second_user_id"]);
-            } else {
-                $users[] = $this->find($userData["first_user_id"]);
-            }
+
+            $users[] = $this->find($userData["second_user_id"]);
+
         }
         return $users;
     }
