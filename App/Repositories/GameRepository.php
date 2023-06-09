@@ -58,7 +58,7 @@ class GameRepository extends Connector implements RepositoryInterface
         return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
             FROM games, playlists, users
             WHERE games.playlist_id = playlists.id 
-            AND games.user_id = users.id")
+            AND games.user_id = users.id order by games.id DESC")
             ->fetchAll();
     }
 
@@ -78,8 +78,8 @@ class GameRepository extends Connector implements RepositoryInterface
     {
         return $this->pdo->query("SELECT games.id, games.date, playlists.name AS playlist_name, users.username AS host_username
             FROM games, playlists, users
-            WHERE games.playlist_id = playlists.id 
-            AND games.user_id = $userId")
+            WHERE (games.playlist_id = playlists.id AND games.user_id = users.id)
+            AND games.user_id = $userId order by games.id DESC ")
             ->fetchAll();
     }
 

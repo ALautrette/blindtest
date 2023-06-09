@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Repositories\TagRepository;
+use PDOException;
 
 class TagController
 {
@@ -33,7 +34,12 @@ class TagController
             require_once __DIR__ . '/../Views/Components/alert-success.php';
             $this->index();
         } catch (PDOException $e) {
-            $error = $e->getMessage();
+            $code = $e->getCode();
+            if($code == 23000) {
+                $error = "Le tag existe déjà";
+            } else {
+                $code = $e->getMessage();
+            }
             require_once __DIR__ . '/../Views/Components/alert-error.php';
             $this->createForm();
         }
