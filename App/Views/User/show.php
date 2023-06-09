@@ -2,7 +2,7 @@
 include 'App/Views/Layouts/head.php';
 include 'App/Views/Layouts/BackOfficeMenu.php';
 ?>
-    <a href="/users">
+    <a href="/dashboard">
         <i class="fa-solid fa-arrow-left" style="font-size: 40px; margin: 10px 0 0 10px"></i>
     </a>
     <section class="container my-5 bg-dark" style="max-width: 1000px;margin:auto;border-radius: 1rem;">
