@@ -6,7 +6,7 @@ class AdminMiddleware extends Middleware
 {
     public function deniedView(): void
     {
-        echo 'Access Denied';
+        include 'App/Views/AccessDenied.php';
     }
 
     public function test(): bool

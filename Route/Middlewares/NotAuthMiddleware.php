@@ -12,6 +12,6 @@ class NotAuthMiddleware extends Middleware
 
     public function deniedView(): void
     {
-        echo 'Access Denied';
+        header('Location: /');
     }
 }
