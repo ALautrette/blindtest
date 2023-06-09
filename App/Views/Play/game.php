@@ -2,6 +2,7 @@
 include 'App/Views/Layouts/head.php';
 ?>
 <section class="player-container d-block position-relative min-vh-100">
+    <div><a href="/dashboard"><i class="fa-solid fa-house m-2" style="font-size:40px;""></i></a></div>
     <div class="position-absolute top-50 start-50 translate-middle">
         <button onclick="onPlayerReady()" id="startButton" class="btn btn-outline-light btn-lg w-100 "
                 type="submit">Play song
@@ -135,3 +136,6 @@ include 'App/Views/Layouts/head.php';
         }
     }
 </style>
+<?php
+include 'App/Views/Layouts/footer.php';
+?>
