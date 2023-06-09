@@ -94,6 +94,7 @@ class AuthController
             $message .= $_SERVER['SERVER_NAME'] . "/newpassword?token=$token\r\n";
             $headers = "From: reset@spaghetti.agency\r\n";
             $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
 
             mail($to, $subject, $message, $headers);
 
