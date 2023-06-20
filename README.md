@@ -58,3 +58,7 @@ Contraintes :
 # Base de donnée
 
 Disponible sur la branche "develop" -> blindtest.sql 
+
+# Documentation technique
+
+Le lien de la documentation technique du projet : https://docs.google.com/document/d/1cuC92Br4ynChtbrSZGXgxOz8LJ9LxlNhiT1CIuTUIRY/edit?usp=sharing
